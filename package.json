@@ -1,6 +1,6 @@
 {
   "name": "@munat/components",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Astro components with Deno",
   "keywords": [
     "astro-component",
@@ -50,7 +50,7 @@
     "./html/Body": "./html/Body/index.astro",
     "./html/Head": "./html/Head/index.astro",
     "./icons/Hamburger": "./icons/Hamburger/index.astro",
-    "./icons/MagnifiyingGlass": "./icons/MagnifiyingGlass/index.astro",
+    "./icons/MagnifyingGlass": "./icons/MagnifyingGlass/index.astro",
     "./landmarks/Footer": "./landmarks/Footer/index.astro",
     "./landmarks/Header": "./landmarks/Header/index.astro",
     "./landmarks/Main": "./landmarks/Main/index.astro",
