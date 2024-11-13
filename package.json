@@ -1,6 +1,6 @@
 {
   "name": "@munat/components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Astro components with Deno",
   "keywords": [
     "astro-component",
@@ -16,7 +16,21 @@
   "author": "Charles F. Munat <charles.munat@gmail.com>",
   "type": "module",
   "files": [
+    "arrows",
+    "buttons",
+    "cards",
+    "heading",
+    "html",
+    "icons",
+    "landmarks",
+    "layouts",
+    "navigation",
+    "punctuation",
+    "sectioning",
     "src",
+    "temporal",
+    "utilities",
+    "widgets",
     "index.ts"
   ],
   "exports": {
