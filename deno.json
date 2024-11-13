@@ -5,7 +5,20 @@
     "indentWidth": 2,
     "semiColons": false,
     "singleQuote": false,
-    "include": ["src/", "public/"]
+    "include": [
+      "src/",
+      "public/",
+      "buttons/",
+      "cards/",
+      "heading/",
+      "html/",
+      "landmarks/",
+      "layouts/",
+      "navigation/",
+      "sectioning/",
+      "utilities/",
+      "widgets/"
+    ]
   },
   "compilerOptions": {
     "allowJs": false,

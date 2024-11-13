@@ -1,0 +1,23 @@
+{
+  "deno.enable": true,
+  "deno.unstable": [
+    "css",
+    "html",
+    "component"
+  ],
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "denoland.vscode-deno",
+  "files.exclude": {
+    ".astro": true,
+    ".git": true,
+    ".gitignore": true,
+    ".vscode": true,
+    "node_modules": true,
+    "pnpm-lock.yaml": true,
+    "tsconfig.json": true,
+    "src/env.d.ts": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
+}

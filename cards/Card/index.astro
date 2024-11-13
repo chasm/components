@@ -1,0 +1,94 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes, HTMLTag } from "astro/types";
+import type { Card } from "../../types";
+
+import Error from "../../widgets/Error/index.astro";
+import Footer from "./Footer/index.astro";
+import HGroup from "./HGroup/index.astro";
+
+import generateShortId from "../../utilities/generateShortId";
+
+export type Props = HTMLAttributes<"li"> & {
+  as?: HTMLTag | undefined;
+  card: Card;
+  hgroup?: HTMLAttributes<"hgroup"> | undefined;
+  href?: string | undefined;
+  label?: string | undefined;
+  cardTitle?: string | undefined;
+  published?: string | undefined;
+  tags?: Array<string> | undefined;
+  timeToRead?: number | undefined;
+  title: string;
+  useMoreLink?: boolean | undefined;
+};
+
+const {
+  as = "h2",
+  card,
+  hgroup = {},
+  href: pageHref,
+  id = generateShortId(),
+  label: lbl,
+  published,
+  tags,
+  timeToRead,
+  title,
+} = Astro.props;
+
+const Heading = as;
+
+const {
+  link: { href: linkHref, label: linkLabel, useMoreLink } = {},
+  title: cardTitle,
+} = card;
+
+const href = linkHref || pageHref;
+const pic = await Astro.slots.render("picture");
+const content = await Astro.slots.render("default");
+const ttl = (await Astro.slots.render("title")) || cardTitle || title;
+const label = linkLabel || lbl || title;
+const dataTags = tags ? { "data-tags": tags.join(",") } : {};
+
+const arrow = await Astro.slots.render("arrow");
+---
+
+<li class="card" {id} {...dataTags}>
+  {
+    tags ? (
+      <div class="card-tags">
+        {tags.map(tag => (
+          <span class="card-tag" data-tag={tag}>
+            {tag}
+          </span>
+        ))}
+      </div>
+    ) : undefined
+  }
+  <div class="content">
+    {pic ? <Fragment set:html={pic} /> : undefined}
+    {
+      ttl ? (
+        published ? (
+          <header>
+            <HGroup {published} {tags} {timeToRead} {...hgroup}>
+              <Heading set:html={ttl} />
+            </HGroup>
+          </header>
+        ) : (
+          <header>
+            <Heading set:html={ttl} />
+          </header>
+        )
+      ) : (
+        <Error message="Missing title!" />
+      )
+    }
+    <Fragment set:html={content} />
+  </div>
+  <Footer {href} {label} {useMoreLink}>
+    <slot name="footer" />
+    <Fragment slot="arrow" set:html={arrow} />
+  </Footer>
+</li>

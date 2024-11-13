@@ -1,0 +1,48 @@
+:root {
+	--body-font-family:
+		seravek, "Gill Sans Nova", ubuntu, calibri, "DejaVu Sans", source-sans-pro,
+		sans-serif;
+	--body-font-weight: 400;
+	--heading-font-family: var(--body-font-family);
+
+	/* colors */
+	--tooltip-background-color: var(--color-powder-1);
+	--tooltip-box-shadow: 5px 5px 5px 0px hsla(0deg 0% 0% / 20%);
+	--tooltip-border: 1px solid var(--color-powder-5);
+	--tooltip-foreground-color: var(--color-powder-5);
+
+	/* font sizes */
+	--step-0: clamp(1rem, 0.9231rem + 0.3846vw, 1.75rem);
+	--step-1: clamp(1.25rem, 1.1538rem + 0.4808vw, 2.1875rem);
+	--step-2: clamp(1.5625rem, 1.4423rem + 0.601vw, 2.7344rem);
+	--step-3: clamp(1.9531rem, 1.8029rem + 0.7512vw, 3.418rem);
+	--step-4: clamp(2.4414rem, 2.2536rem + 0.939vw, 4.2725rem);
+	--step-5: clamp(3.0518rem, 2.817rem + 1.1738vw, 5.3406rem);
+
+	/* spacing */
+	--space-3xs: clamp(0.25rem, 0.2308rem + 0.0962vw, 0.4375rem);
+	--space-2xs: clamp(0.5rem, 0.4615rem + 0.1923vw, 0.875rem);
+	--space-xs: clamp(0.75rem, 0.6923rem + 0.2885vw, 1.3125rem);
+	--space-s: clamp(1rem, 0.9231rem + 0.3846vw, 1.75rem);
+	--space-m: clamp(1.5rem, 1.3846rem + 0.5769vw, 2.625rem);
+	--space-l: clamp(2rem, 1.8462rem + 0.7692vw, 3.5rem);
+	--space-xl: clamp(3rem, 2.7692rem + 1.1538vw, 5.25rem);
+	--space-2xl: clamp(4rem, 3.6923rem + 1.5385vw, 7rem);
+	--space-3xl: clamp(6rem, 5.5385rem + 2.3077vw, 10.5rem);
+}
+
+body {
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	justify-content: space-between;
+}
+
+body > :not(main) {
+	flex-basis: min-content;
+}
+
+body > main {
+	flex-basis: auto;
+}

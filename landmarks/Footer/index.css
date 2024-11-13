@@ -1,0 +1,9 @@
+body > footer {
+	background-color: var(--footer-background-color, white);
+	border-bottom: var(--footer-border-bottom, none);
+	border-top: var(--footer-border-top, none);
+	color: var(--footer-foreground-color, black);
+	margin: var(--footer-margin, 0);
+	padding-block: var(--footer-padding-block, 0.5rem 0.25rem);
+	padding-inline: var(--footer-padding-inline, 2svw);
+}

@@ -1,0 +1,24 @@
+nav > ol,
+nav > ul {
+	align-items: center;
+	display: flex;
+	gap: 1rem;
+	justify-content: flex-start;
+	list-style-type: none;
+	margin-inline: 0;
+	padding-inline: 0;
+	text-transform: lowercase;
+}
+
+nav > ol:has(.separator),
+nav > ul:has(.separator) {
+	gap: 0;
+}
+
+nav > ol .separator,
+nav > ul .separator {
+	color: var(--separator-color, currentcolor);
+	display: inline-block;
+	text-align: center;
+	width: 1.5rem;
+}

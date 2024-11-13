@@ -1,0 +1,13 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"main">;
+
+const props = Astro.props;
+---
+
+<main {...props}>
+	<slot />
+</main>

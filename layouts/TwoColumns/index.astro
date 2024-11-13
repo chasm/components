@@ -1,0 +1,24 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"div">;
+
+const props = Astro.props;
+
+const attrs = Object.assign(
+	{
+		class: "two-columns",
+	},
+	props,
+);
+
+const left = await Astro.slots.render("left");
+const right = await Astro.slots.render("right");
+---
+
+<div {...attrs}>
+	<Fragment set:html={left} />
+	<Fragment set:html={right} />
+</div>

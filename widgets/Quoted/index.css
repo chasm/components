@@ -1,0 +1,19 @@
+q {
+	quotes: "“" "”" "‘" "’";
+}
+
+.double-quoted::after {
+	content: "”";
+}
+
+.double-quoted::before {
+	content: "“";
+}
+
+.single-quoted::after {
+	content: "’";
+}
+
+.single-quoted::before {
+	content: "‘";
+}

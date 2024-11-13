@@ -1,0 +1,26 @@
+---
+import "./index.css";
+---
+
+<p>
+	<button
+		aria-live="assertive"
+		aria-pressed="false"
+		class="toggle-button"
+		id="notify-button"
+		name="notify-by-email"
+		type="button"
+	>
+		Notifications off
+	</button>
+</p>
+<script is:inline>
+	const toggle = document.querySelector("#notify-button");
+
+	toggle.addEventListener("click", () => {
+		const pressed = toggle.getAttribute("aria-pressed") === "true";
+
+		toggle.setAttribute("aria-pressed", pressed ? "false" : "true");
+		toggle.innerText = pressed ? "Notifications off" : "Notifications on";
+	});
+</script>

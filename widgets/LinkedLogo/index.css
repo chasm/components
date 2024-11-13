@@ -1,0 +1,7 @@
+.logo {
+	font-size: var(--step-3);
+}
+
+.logo a {
+	text-decoration: none;
+}

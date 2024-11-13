@@ -1,0 +1,51 @@
+.toggletip {
+	background-color: var(--toggletip-background-color, white);
+	border-radius: 50%;
+	border: 2px solid gray;
+	color: var(--toggletip-foreground-color, black);
+	cursor: pointer;
+	font-family:
+		"Iowan Old Style",
+		"Palatino Linotype",
+		"URW Palladio L",
+		P052,
+		serif;
+	font-size: 1.2rem;
+	font-style: italic;
+	font-weight: 500;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	margin-inline: 0.25rem;
+	line-height: 1;
+	height: 2rem;
+	width: 2rem;
+}
+
+.toggletip:focus,
+.toggletip:hover {
+	background-color: var(
+		--toggletip-background-color-hover,
+		var(--color-indigo-5)
+	);
+	color: var(--toggletip-foreground-color-hover, var(--color-gray-1));
+}
+
+[role="status"] {
+	display: inline-block;
+	position: relative;
+}
+
+.toggletip-bubble {
+	background-color: var(--tooltip-background-color, white);
+	border: var(--tooltip-border, 1px solid gray);
+	border-radius: var(--tooltip-border-radius, 5px);
+	box-shadow: var(--tooltip-box-shadow, none);
+	color: var(--tooltip-foreground-color, black);
+	display: inline;
+	width: 24rem;
+	margin-inline: 0.25rem;
+	padding-block: 0.5rem;
+	padding-inline: 0.75rem;
+	position: absolute;
+}

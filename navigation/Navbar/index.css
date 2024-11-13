@@ -1,0 +1,9 @@
+body > aside[aria-label] {
+	background-color: var(--navbar-background-color, white);
+	border-bottom: var(--navbar-border-bottom, none);
+	border-top: var(--navbar-border-top, none);
+	color: var(--navbar-foreground-color, black);
+	margin: var(--navbar-margin, 0);
+	padding-block: var(--navbar-padding-block, 0);
+	padding-inline: var(--navbar-padding-inline, 2svw);
+}

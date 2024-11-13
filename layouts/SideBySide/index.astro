@@ -1,0 +1,39 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+import Heading from "../../heading/index.astro";
+
+import generateShortId from "../../utilities/generateShortId";
+
+export type Props = HTMLAttributes<"section"> & {
+	heading?: HTMLAttributes<"h1"> | undefined;
+	title?: string | undefined;
+};
+
+const { heading = {}, title, ...props } = Astro.props;
+
+const ttl = (await Astro.slots.render("title")) || title;
+const content = await Astro.slots.render("default");
+
+const attrs = Object.assign(
+	{
+		class: "side-by-side",
+		id: generateShortId(),
+	},
+	props,
+);
+
+const headingAttrs = Object.assign(
+	{
+		id: `${attrs.id}-heading`,
+	},
+	heading,
+);
+---
+
+<section {...attrs}>
+	<Heading {...headingAttrs} set:html={ttl} />
+	<div set:html={content} />
+</section>

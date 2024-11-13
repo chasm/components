@@ -1,0 +1,14 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"html">;
+
+const { lang = "en", ...props } = Astro.props;
+---
+
+<!doctype html>
+<html {...props} {lang}>
+	<slot />
+</html>

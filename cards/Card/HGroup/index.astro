@@ -1,0 +1,33 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+import Published from "./Published/index.astro";
+import Tags from "./Tags/index.astro";
+import TimeToRead from "./TimeToRead/index.astro";
+
+export type Props = HTMLAttributes<"hgroup"> & {
+	published?: string | undefined;
+	tags?: Array<string> | undefined;
+	timeToRead?: number | undefined;
+};
+
+const { published, tags, timeToRead, ...props } = Astro.props;
+
+const attrs = Object.assign(
+	{
+		class: "card-hgroup",
+	},
+	props,
+);
+---
+
+<hgroup {...attrs}>
+	<slot />
+	<div class="timeline">
+		<Published {published} />
+		<TimeToRead {timeToRead} />
+	</div>
+	<Tags {tags} />
+</hgroup>

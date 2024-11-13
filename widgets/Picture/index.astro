@@ -1,0 +1,28 @@
+---
+import type { Props as SourceProps } from "./Source/index.astro"
+
+import Source from "./Source/index.astro"
+
+type Img = {
+	height: string | number
+	src: string
+	width: string | number
+}
+
+export type Props = {
+	alt?: string | undefined
+	img: Img
+	sources?: Array<SourceProps> | undefined
+}
+
+const {
+	alt = "",
+	img: { height, src, width },
+	sources = [],
+} = Astro.props
+---
+
+<picture>
+	{sources.map((attrs: SourceProps) => <Source {...attrs} />)}
+	<img {alt} {height} {src} {width} />
+</picture>

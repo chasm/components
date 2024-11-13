@@ -1,0 +1,4 @@
+.uplink a {
+	background-color: var(--uplink-background-color, transparent);
+	color: var(--uplink-foreground-color, currentcolor);
+}

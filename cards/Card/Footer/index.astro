@@ -1,0 +1,28 @@
+---
+import "./index.css"
+
+import type { HTMLAttributes } from "astro/types"
+
+import Error from "../../../widgets/Error/index.astro"
+
+export type Props = HTMLAttributes<"footer"> & {
+	href?: string | undefined
+	label?: string | undefined
+	useMoreLink?: boolean | undefined
+}
+
+const { href, label, useMoreLink } = Astro.props
+---
+
+<footer class="card-footer">
+	<slot />
+	{href ? (
+		useMoreLink ? (
+			<a aria-label={`Read more: ${label}`} class="button-right" {href}>Read more <slot name="arrow" /></a>
+		) : (
+		<a class="button-right" {href}>{label} <slot name="arrow" /></a>
+		)
+	) : (
+		<Error message="Missing link label!"} />
+	)}
+</footer>

@@ -1,0 +1,20 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"span"> & {
+  message?: string | undefined;
+};
+
+const { message, ...props } = Astro.props;
+
+const attrs = Object.assign(
+  {
+    class: "error",
+  },
+  props
+);
+---
+
+<span data-error {...attrs}>ERROR{message ? `: ${message}` : ""}</span>

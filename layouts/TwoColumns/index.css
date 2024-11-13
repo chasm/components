@@ -1,0 +1,15 @@
+.two-columns {
+	align-items: flex-start;
+	background-color: var(--two-columns-background-color, transparent);
+	color: var(--two-columns-foreground-color, currentcolor);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	justify-content: flex-start;
+	line-height: 1.5;
+	margin-block: 2rem 4rem;
+}
+
+.two-columns > * {
+	flex-basis: var(--two-columns-column-width, 48%);
+}

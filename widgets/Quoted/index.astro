@@ -1,0 +1,25 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"q"> & {
+	single?: boolean | undefined;
+};
+
+const { cite, single, ...props } = Astro.props;
+
+const quoted = single ? "single-quoted" : "double-quoted";
+---
+
+{
+	cite ? (
+		<q {cite} {...props}>
+			<slot />
+		</q>
+	) : (
+		<span class={quoted}>
+			<slot />
+		</span>
+	)
+}

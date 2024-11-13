@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import { Intl as I, Temporal } from "temporal-polyfill";
+
+export type Props = HTMLAttributes<"hgroup"> & {
+  published?: string | undefined;
+};
+
+const { published } = Astro.props;
+
+const format = I.DateTimeFormat("en-NZ", {
+  day: "numeric",
+  month: "long",
+  timeZone: "Pacific/Auckland",
+  year: "numeric",
+}).format;
+---
+
+{
+  published ? (
+    <time datetime={published}>
+      {format(Temporal.PlainDate.from(published))}
+    </time>
+  ) : undefined
+}

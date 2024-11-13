@@ -1,0 +1,13 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"footer">;
+
+const props = Astro.props;
+---
+
+<footer {...props}>
+	<slot />
+</footer>

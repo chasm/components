@@ -1,0 +1,15 @@
+---
+export type Props = {
+  height: string | number;
+  media?: string | undefined;
+  srcset: string | Array<string>;
+  type: string;
+  width: string | number;
+};
+
+const { height, media, srcset: sources, type, width } = Astro.props;
+
+const srcset = Array.isArray(sources) ? sources.join(", ") : sources;
+---
+
+<source {height} {media} {srcset} {type} {width} />

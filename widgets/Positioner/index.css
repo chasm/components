@@ -1,0 +1,50 @@
+progress[value] {
+	-webkit-appearance: progress-bar;
+	appearance: none;
+	background-color: var(--positioner-background-color, black);
+	border-radius: 0;
+	border: none;
+	color: var(--positioner-foreground-color, gray);
+	height: 6px;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+}
+
+body {
+	overflow: scroll;
+	height: 100svh;
+}
+
+progress[value]::-webkit-progress-bar {
+	background-color: var(--positioner-background-color, black);
+	border-radius: 0;
+}
+
+progress[value]::-webkit-progress-value {
+	background-color: var(--positioner-foreground-color, gray);
+}
+
+progress[value]::-moz-progress-bar {
+	background-color: var(--positioner-foreground-color, gray);
+	border-radius: 0;
+}
+
+.progress-bar {
+	appearance: progress-bar;
+	background-color: var(--positioner-background-color, black);
+	border-radius: 0;
+	border: none;
+	display: block;
+	height: 6px;
+	width: 100%;
+}
+
+.progress-bar > span {
+	background-color: var(--positioner-foreground-color, gray);
+	display: block;
+	height: 100%;
+}

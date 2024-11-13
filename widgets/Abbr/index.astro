@@ -1,0 +1,16 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+import generateShortId from "../../utilities/generateShortId";
+
+export type Props = HTMLAttributes<"abbr">;
+
+const { id = generateShortId(), title, ...props } = Astro.props;
+
+const content = await Astro.slots.render("default");
+---
+
+<abbr aria-labelledby={id} {...props}>{content}</abbr>
+<span id={id} role="tooltip">{title}</span>

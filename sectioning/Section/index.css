@@ -1,0 +1,13 @@
+section {
+	line-height: var(--section-line-height, 1.5);
+	max-width: var(--section-max-width, min(92svw, 64ch));
+	margin-block: var(--section-margin-block, 0);
+	margin-inline: var(--section-margin-inline, auto);
+	padding-block: var(--section-padding-block, 0);
+	padding-inline: var(--section-padding-inline, 0);
+}
+
+/* section > * + *,
+section section > * + * {
+	margin-block: var(--section-content-vertical-spacing, 1.25rem 0);
+} */

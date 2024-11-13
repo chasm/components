@@ -1,0 +1,13 @@
+.cc-license-link {
+	align-items: center;
+	display: inline-flex;
+	gap: 0.2rem;
+	justify-content: flex-start;
+}
+
+.cc-license-link:focus,
+.cc-license-link:hover {
+	border-radius: 5px;
+	outline: var(--cc-license-outline, 3px solid currentcolor);
+	outline-offset: 5px;
+}

@@ -1,0 +1,71 @@
+---
+import "./index.css";
+
+import ByAttribution from "./ByAttribution/index.astro";
+import CreativeCommons from "./CreativeCommons/index.astro";
+import NoDerivatives from "./NoDerivatives/index.astro";
+import NonCommercial from "./NonCommercial/index.astro";
+import PublicDomainDedication from "./PublicDomainDedication/index.astro";
+import ShareAlike from "./ShareAlike/index.astro";
+import Tooltip from "../Tooltip/index.astro";
+
+import getLicense from "./getLicense";
+
+const {
+	byAttribution,
+	fill = "var(--cc-license-fill-color, #fafafa)",
+	link = {},
+	noDerivatives,
+	nonCommercial,
+	shareAlike,
+	size = "2rem",
+	stroke = "var(--cc-license-stroke-color, #131315)",
+	...props
+} = Astro.props;
+
+const { href, license } = getLicense(Astro.props);
+
+const attrs = Object.assign(
+	{
+		class: "cc-license",
+	},
+	props,
+);
+
+const linkAttrs = Object.assign(
+	{
+		"aria-label": `Creative Commons ${license}`,
+		class: "cc-license-link image",
+		href,
+		rel: "license",
+	},
+	link,
+);
+---
+
+<Tooltip tip={`Creative Commons ${license}`}>
+	<div {...attrs}>
+		<a {...linkAttrs}>
+			<CreativeCommons {fill} {license} {size} {stroke} />
+			{
+				byAttribution ? (
+					<ByAttribution {fill} {size} {stroke} />
+				) : (
+					<PublicDomainDedication {fill} {size} {stroke} />
+				)
+			}
+			{
+				byAttribution && nonCommercial ? (
+					<NonCommercial {fill} {size} {stroke} />
+				) : null
+			}
+			{
+				byAttribution && noDerivatives ? (
+					<NoDerivatives {fill} {size} {stroke} />
+				) : byAttribution && shareAlike ? (
+					<ShareAlike {fill} {size} {stroke} />
+				) : null
+			}
+		</a>
+	</div>
+</Tooltip>

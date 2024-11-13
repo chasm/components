@@ -1,0 +1,59 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+import type { Anchor } from "../../types.ts";
+
+import generateShortId from "../../utilities/generateShortId";
+
+export type Props = HTMLAttributes<"nav"> & {
+  as?: "ul" | "ol";
+  label?: string;
+  level?: number;
+  links: Array<Anchor>;
+  separator?: string;
+  srOnly?: boolean;
+};
+
+const {
+  as = "ul",
+  label = "Breadcrumb trail",
+  id = generateShortId(),
+  level = 2,
+  links,
+  separator,
+  srOnly = true,
+  ...props
+} = Astro.props;
+
+const { pathname } = Astro.url;
+
+const path = pathname ?? "/";
+
+const List = as;
+---
+
+{
+  links ? (
+    <nav aria-label={label} {...props} {id}>
+      <List>
+        {links.map(({ href, label, rel }: Anchor) =>
+          href === path ? (
+            <li>
+              <span aria-current="page">{label}</span>
+            </li>
+          ) : (
+            <li>
+              <a {href} {rel}>
+                {label}
+              </a>
+              {separator ? (
+                <span class="separator">{separator}</span>
+              ) : undefined}
+            </li>
+          )
+        )}
+      </List>
+    </nav>
+  ) : undefined
+}

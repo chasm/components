@@ -1,0 +1,22 @@
+button[aria-pressed] {
+	border-radius: 5px;
+	padding: 0.25rem 0.5rem;
+}
+
+button[aria-pressed="false"] {
+	background-color: var(--toggle-button-background-color, white);
+	border: var(--toggle-button-border, 1px solid blue);
+	box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.21);
+	color: var(--toggle-button-foreground-color, blue);
+}
+
+button[aria-pressed="true"] {
+	background-color: var(--toggle-button-background-color-toggled, white);
+	border: var(--toggle-button-border-toggled, 1px solid green);
+	box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.21) inset;
+	color: var(--toggle-button-foreground-color-toggled, green);
+}
+
+[aria-pressed="true"]::after {
+	content: "\0020✓";
+}

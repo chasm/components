@@ -1,0 +1,70 @@
+---
+import type { Calendar } from "../types.ts";
+
+import { Intl, Temporal } from "temporal-polyfill";
+import {
+  DEFAULT_CALENDAR,
+  DEFAULT_DATE_OPTIONS,
+  DEFAULT_LOCALES,
+} from "../constants.ts";
+
+export type Props = {
+  calendar?: Calendar | Temporal.CalendarLike;
+  day?: number | string | undefined | null;
+  era?: string | undefined | null;
+  eraYear?: string | undefined | null;
+  format?: string | undefined | null;
+  locales?: string | Array<string> | undefined;
+  month?: number | string | undefined | null;
+  monthCode?: string | undefined | null;
+  options?: Intl.DateTimeFormatOptions | undefined | null;
+  plainDate?: string | Temporal.PlainDateLike | undefined | null;
+  year?: number | string | undefined | null;
+};
+
+const {
+  calendar = DEFAULT_CALENDAR,
+  day,
+  era,
+  eraYear,
+  locales = DEFAULT_LOCALES,
+  month,
+  monthCode,
+  options = {},
+  plainDate = Temporal.Now.plainDate(Astro.props.calendar || DEFAULT_CALENDAR),
+  year,
+  ...props
+} = Astro.props;
+
+const val =
+  plainDate ||
+  ({
+    calendar,
+    day,
+    ...(monthCode ? { monthCode } : { month }),
+    ...(era ? { era, eraYear } : { year }),
+  } as Temporal.PlainDateLike);
+
+const value = Temporal.PlainDate.from(val);
+
+const opts = {
+  ...DEFAULT_DATE_OPTIONS,
+  calendar: value.calendarId.toString(),
+  ...options,
+} as Intl.DateTimeFormatOptions;
+
+const label = new Intl.DateTimeFormat(locales, opts).format(
+  new Date(value.year, value.month - 1, value.day)
+);
+
+const attrs = Object.assign(
+  {
+    class: "plain-date",
+  },
+  props
+);
+---
+
+<time {...attrs} datetime={value.toJSON()}>
+  {label}
+</time>

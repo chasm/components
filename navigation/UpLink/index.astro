@@ -1,0 +1,43 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+import type { AstroPage } from "../../types.ts";
+
+export type Props = HTMLAttributes<"nav"> & {
+  label?: string | undefined;
+  pages: Array<AstroPage>;
+};
+
+const { label: l, pages, ...props } = Astro.props;
+
+const attrs = Object.assign(
+  {
+    class: "uplink",
+  },
+  props
+);
+
+const { pathname } = Astro.url;
+const href =
+  pathname
+    .replace(/(?<=.)\/$/, "")
+    .split("/")
+    .slice(0, -1)
+    .join("/") || "/";
+const label =
+  pages.find(page => page.url === href)?.metadata?.label || l || "Up";
+
+const arrow = await Astro.slots.render("arrow");
+---
+
+<nav aria-label="Link to parent page." {...attrs}>
+  {
+    href && href.length ? (
+      <>
+        <Fragment set:html={arrow} />
+        <a href={href}>{href === "/" ? "Home" : label}</a>
+      </>
+    ) : undefined
+  }
+</nav>

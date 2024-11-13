@@ -1,0 +1,39 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+import generateShortId from "../utilities/generateShortId";
+
+export type Props = HTMLAttributes<"h1"> & {
+	header?: HTMLAttributes<"header"> | undefined;
+	level?: number;
+};
+
+const { header = {}, level = -1, ...props } = Astro.props;
+
+const Hn = level > 0 && level < 7 ? `h${level}` : "h2";
+
+const content = await Astro.slots.render("default");
+const subtitle = await Astro.slots.render("subtitle");
+
+const attrs = Object.assign(
+	{
+		id: generateShortId(),
+	},
+	props,
+);
+---
+
+<header {...header}>
+	{
+		subtitle ? (
+			<hgroup>
+				<Hn {...attrs} set:html={content} />
+				<Fragment set:html={subtitle} />
+			</hgroup>
+		) : (
+			<Hn {...attrs} set:html={content} />
+		)
+	}
+</header>

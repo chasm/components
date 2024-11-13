@@ -1,0 +1,16 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+import generateShortId from "../../utilities/generateShortId";
+
+export type Props = HTMLAttributes<"section">;
+
+const { id = generateShortId(), ...props } = Astro.props;
+---
+
+<section {id} {...props}>
+	<slot name="title" />
+	<slot />
+</section>

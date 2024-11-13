@@ -1,0 +1,54 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+import generateShortId from "../../utilities/generateShortId";
+
+export type Props = HTMLAttributes<"button">;
+
+const { id = generateShortId(), ...props } = Astro.props;
+
+const attrs = Object.assign(
+	{
+		class: "toggletip",
+	},
+	props,
+);
+---
+
+<button aria-labelledby={id} data-toggletip {...attrs} type="button">
+	<slot />
+</button>
+<span id={id} role="status"></span>
+
+<script is:inline>
+	const toggletips = document.querySelectorAll("[data-toggletip]");
+
+	for (const tip of toggletips) {
+		const message = tip.getAttribute("title");
+		tip.setAttribute("data-tooltip-content", message);
+		tip.removeAttribute("title");
+
+		const liveRegion = tip.nextElementSibling;
+
+		tip.addEventListener("click", function () {
+			liveRegion.innerHTML = "";
+			window.setTimeout(function () {
+				liveRegion.innerHTML = `<span class="toggletip-bubble">${message}</span>`;
+			}, 100);
+		});
+
+		document.addEventListener("click", function (e) {
+			if (tip !== e.target) {
+				liveRegion.innerHTML = "";
+			}
+		});
+
+		tip.addEventListener("keydown", function (e) {
+			if ((e.keyCode || e.which) === 27) {
+				liveRegion.innerHTML = "";
+			}
+		});
+	}
+</script>

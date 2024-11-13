@@ -1,0 +1,21 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"div"> & {
+	tags?: Array<string> | undefined;
+};
+
+const { tags } = Astro.props;
+---
+
+{
+	tags ? (
+		<div class="tags">
+			{tags.map(tag => (
+				<span class="tag">{tag}</span>
+			))}
+		</div>
+	) : undefined
+}

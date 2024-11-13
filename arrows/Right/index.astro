@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import clamp from "../../utilities/clamp";
+
+export type Props = HTMLAttributes<"svg">;
+
+const { fill = "black", height = 44, width = 215 } = Astro.props;
+
+const h = Number(height);
+const hh = h / 2;
+const w = clamp(Number(width), h * 2, h * 10);
+---
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	fill="none"
+	{height}
+	{width}
+	viewBox={`0 0 ${w} ${h}`}
+>
+	<path
+		{fill}
+		d={`M ${w} ${hh} L ${w - h} 0 L ${w - h} ${hh - 1} L 0 ${hh - 1} L 0 ${hh + 1} L ${w - h} ${hh + 1} L ${w - h} ${h} Z`}
+	></path>
+</svg>

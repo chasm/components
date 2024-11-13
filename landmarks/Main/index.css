@@ -1,0 +1,10 @@
+body > main {
+	background-color: var(--main-background-color, white);
+	border-bottom: var(--main-border-bottom, none);
+	border-top: var(--main-border-top, none);
+	color: var(--main-foreground-color, black);
+	margin-block: var(--main-margin-block, 0);
+	margin-inline: var(--main-margin-inline, 0);
+	padding-block: var(--main-padding-block, 0);
+	padding-inline: var(--main-padding-inline, 0);
+}

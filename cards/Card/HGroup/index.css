@@ -1,0 +1,13 @@
+.timeline {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0;
+	justify-content: flex-start;
+	font-size: 1rem;
+	margin: 0 0 0.25rem 0;
+}
+
+.timeline:has(:nth-child(2)) :first-child::after {
+	content: ",\00a0";
+}

@@ -1,0 +1,30 @@
+.tooltip {
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	text-decoration-style: dotted;
+	text-decoration-color: gray;
+}
+
+.tooltip:hover,
+.tooltip:focus {
+	background-color: var(--tool-background-color-hover, var(--color-yellow-2));
+}
+
+[role="tooltip"] {
+	background-color: var(--tooltip-background-color, white);
+	border: var(--tooltip-border, 1px solid gray);
+	border-radius: var(--tooltip-border-radius, 5px);
+	box-shadow: var(--tooltip-box-shadow, none);
+	color: var(--tooltip-foreground-color, black);
+	display: none;
+	max-width: 24rem;
+	margin-inline: 0.25rem;
+	padding-block: 0.5rem;
+	padding-inline: 0.75rem;
+}
+
+*:hover + [role="tooltip"],
+*:focus + [role="tooltip"] {
+	display: inline-block;
+	position: absolute;
+}

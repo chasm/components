@@ -1,0 +1,8 @@
+span.error {
+	background-color: var(--error-background-color, var(--color-red-2, red));
+	border: var(--error-border, 3px dashed var(--color-red-4, black));
+	color: var(--color-gray-6, black);
+	display: inline-block;
+	font-weight: 700;
+	padding: 0.25rem 0.75rem;
+}

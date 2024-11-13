@@ -1,0 +1,30 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes, HTMLTag } from "astro/types";
+
+import generateShortId from "../../utilities/generateShortId";
+
+export type Props = HTMLAttributes<"span"> & {
+	as?: HTMLTag | undefined;
+	tip: string;
+};
+
+const { as = "span", id = generateShortId(), tip, ...props } = Astro.props;
+
+const Component = as;
+
+const attrs = Object.assign(
+	{
+		class: "tooltip",
+	},
+	props,
+);
+
+const content = (await Astro.slots.render("tip")) || tip;
+---
+
+<Component aria-labelledby={id} {...attrs}>
+	<slot />
+</Component>
+<span id={id} role="tooltip">{content}</span>

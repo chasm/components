@@ -1,0 +1,115 @@
+li.card {
+	align-items: stretch;
+	background-color: var(--card-background-color, inherit);
+	border: 2px solid var(--card-border-color);
+	border-radius: 5px;
+	box-shadow: var(--card-box-shadow, none);
+	color: var(--card-foreground-color, currentcolor);
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+	justify-content: flex-start;
+	margin: 0;
+	padding: 1.5rem 1rem 0.5rem;
+	position: relative;
+}
+
+li.card img {
+	margin: 0 0 1rem 0;
+}
+
+li.card h2 {
+	font-size: var(--step-2);
+	font-weight: 500;
+	line-height: 1.1;
+	margin: 0 0 0.75rem;
+	padding: 0;
+}
+
+li.card a {
+	color: currentcolor;
+	outline: none;
+	text-decoration: none;
+}
+
+li.card:focus-within,
+li.card:hover {
+	background-color: var(--card-background-color-hover);
+	border-color: var(--card-border-color-hover);
+	border-width: 2px;
+	box-shadow: var(--card-box-shadow-hover, none);
+	color: var(--card-foreground-color-hover, currentcolor);
+	cursor: pointer;
+}
+
+li.card:focus-within img,
+li.card:hover img {
+	background-color: var(--card-img-background-color-hover);
+}
+
+li.card .content {
+	flex-grow: 1;
+}
+
+footer:has(a.button-right) {
+	margin-block: auto 0;
+	text-align: right;
+}
+
+a.button-right {
+	display: inline-block;
+	font-style: italic;
+	padding-block: 0.5rem;
+	padding-inline: 0.75rem;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+a.button-right:focus,
+a.button-right:hover {
+	color: var(--card-button-foreground-color-hover);
+}
+
+a.button-right::after {
+	content: "\0020\2192\0020";
+}
+
+.card-tags {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	justify-content: flex-end;
+	margin: 0;
+	padding-block: 0.5rem;
+	padding-inline: 0;
+	position: absolute;
+	top: 0;
+	right: 1rem;
+}
+
+.card-tag {
+	background-color: var(--card-tag-background-color, var(--color-gray-5));
+	border-radius: 10px;
+	border: var(--card-tag-border, none);
+	color: var(--card-tag-foreground-color, var(--color-gray-1));
+	font-style: italic;
+	font-weight: 300;
+	opacity: var(--card-tag-opacity, 1);
+	padding: 0.35rem 0.9rem;
+	text-transform: uppercase;
+}
+
+.card-tag[data-active] {
+	background-color: var(
+		--card-tag-background-color-active,
+		var(--color-lime-2)
+	);
+	border-radius: 10px;
+	border: var(--card-tag-border-active, 2px solid var(--color-gray-5));
+	color: var(--card-tag-foreground-color-active, var(--color-gray-6));
+}
+
+.card > .card-footer:has(a) {
+	margin-block: 2.4rem 0.8rem;
+}
