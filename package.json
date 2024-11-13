@@ -1,6 +1,6 @@
 {
   "name": "@munat/components",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Astro components with Deno",
   "keywords": [
     "astro-component",
@@ -62,7 +62,7 @@
     "./navigation/SiblingLinks": "./navigation/SiblingLinks/index.astro",
     "./navigation/SkipLink": "./navigation/SkipLink/index.astro",
     "./navigation/Trail": "./navigation/Trail/index.astro",
-    "./navigation/Uplink": "./navigation/Uplink/index.astro",
+    "./navigation/UpLink": "./navigation/UpLink/index.astro",
     "./punctuation/EmDash": "./punctuation/EmDash/index.astro",
     "./punctuation/EnDash": "./punctuation/EnDash/index.astro",
     "./sectioning/Article": "./sectioning/Article/index.astro",
