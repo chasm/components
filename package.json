@@ -1,23 +1,39 @@
 {
   "name": "@munat/components",
-  "description": "Astro components with Deno",
-  "type": "module",
   "version": "0.0.1",
+  "description": "Astro components with Deno",
+  "keywords": [
+    "astro-component",
+    "sitebender",
+    "vanilla"
+  ],
+  "homepage": "https://github.com/chasm/components#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chasm/components.git"
+  },
+  "license": "MIT",
+  "author": "Charles F. Munat <charles.munat@gmail.com>",
+  "type": "module",
+  "files": [
+    "src",
+    "index.ts"
+  ],
   "scripts": {
     "astro": "astro",
     "build": "astro check && astro build",
+    "bump": "pnpm version patch --force",
     "bump:major": "pnpm version major --force",
     "bump:minor": "pnpm version minor --force",
-    "bump": "pnpm version patch --force",
     "check:packages": "pnpx npm-check -u",
     "dep": "pnpm fmt && pnpm lint && pnpm lint:fix && pnpm check:packages && pnpm build && rm -rf .cache .history dist",
     "dev": "astro dev --port 4322 --host",
     "fmt": "deno fmt",
     "lint": "deno lint",
     "lint:fix": "deno lint --fix",
+    "preview": "astro preview",
     "pub": "npm publish --access=public",
     "push": "git add -A && pnpm bump && git push",
-    "preview": "astro preview",
     "start": "astro dev"
   },
   "dependencies": {
