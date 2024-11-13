@@ -1,6 +1,6 @@
 {
   "name": "@munat/components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Astro components with Deno",
   "keywords": [
     "astro-component",
@@ -34,20 +34,6 @@
     "index.ts"
   ],
   "exports": {
-    "./arrows": "./arrows",
-    "./buttons": "./buttons",
-    "./cards": "./cards",
-    "./heading": "./heading",
-    "./html": "./html",
-    "./icons": "./icons",
-    "./landmarks": "./landmarks",
-    "./layouts": "./layouts",
-    "./navigation": "./navigation",
-    "./punctuation": "./punctuation",
-    "./sectioning": "./sectioning",
-    "./temporal": "./temporal",
-    "./utilities": "./utilities",
-    "./widgets": "./widgets",
     ".": "./index.ts"
   },
   "scripts": {
