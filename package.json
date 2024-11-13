@@ -1,6 +1,6 @@
 {
   "name": "@munat/components",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Astro components with Deno",
   "keywords": [
     "astro-component",
@@ -68,6 +68,7 @@
     "./sectioning/Article": "./sectioning/Article/index.astro",
     "./sectioning/Section": "./sectioning/Section/index.astro",
     "./temporal/PlainDate": "./temporal/PlainDate/index.astro",
+    "./types": "./types.ts",
     "./utilities/clamp": "./utilities/clamp/index.ts",
     "./utilities/generateShortId": "./utilities/generateShortId/index.ts",
     "./utilities/getPaths": "./utilities/getPaths/index.ts",
