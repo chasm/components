@@ -1,6 +1,6 @@
 {
   "name": "@munat/components",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Astro components with Deno",
   "keywords": [
     "astro-component",
@@ -46,9 +46,9 @@
     "./cards/Card/HGroup/TimeToRead": "./cards/Card/HGroup/TimeToRead/index.astro",
     "./cards/Cards": "./cards/index.astro",
     "./heading/Heading": "./heading/index.astro",
-    "./html/Html": "./html/index.astro",
     "./html/Body": "./html/Body/index.astro",
     "./html/Head": "./html/Head/index.astro",
+    "./html/Html": "./html/index.astro",
     "./icons/Hamburger": "./icons/Hamburger/index.astro",
     "./icons/MagnifyingGlass": "./icons/MagnifyingGlass/index.astro",
     "./landmarks/Footer": "./landmarks/Footer/index.astro",
@@ -85,8 +85,8 @@
     "./widgets/LinkedLogo": "./widgets/LinkedLogo/index.astro",
     "./widgets/Picture": "./widgets/Picture/index.astro",
     "./widgets/Picture/Source": "./widgets/Picture/Source/index.astro",
-    "./widgets/Positioner": "./widgets/Positioner/index.astro",
     "./widgets/Quoted": "./widgets/Quoted/index.astro",
+    "./widgets/ScrollIndicator": "./widgets/ScrollIndicator/index.astro",
     "./widgets/Toggletip": "./widgets/Toggletip/index.astro",
     "./widgets/Tooltip": "./widgets/Tooltip/index.astro",
     ".": "./index.ts"
@@ -112,7 +112,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.2.1",
     "@types/node": "^22.9.0",
-    "astro": "^4.16.11",
+    "astro": "^4.16.13",
     "temporal-polyfill": "^0.2.5",
     "typescript": "^5.6.3"
   }
