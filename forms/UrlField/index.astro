@@ -1,0 +1,58 @@
+---
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import FieldWrapper from "../FieldWrapper/index.astro";
+import UrlInput from "../elements/UrlInput/index.astro";
+
+const {
+  autocorrect: _autocorrect,
+  datalist = {},
+  field = "url-field",
+  form,
+  help,
+  id = generateShortId(),
+  inputmode = "url",
+  label = "URL",
+  legend,
+  list,
+  message,
+  name,
+  outer,
+  placeholder: _placeholder,
+  required,
+  tag,
+  value,
+  wrapper = {},
+} = Astro.props;
+---
+
+<FieldWrapper
+  {field}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => {
+      return (
+        <UrlInput
+          {datalist}
+          {field}
+          {form}
+          {id}
+          {inputmode}
+          {labelledBy}
+          {list}
+          {name}
+          {required}
+          {value}
+          {wrapper}
+        />
+      );
+    }
+  }
+</FieldWrapper>

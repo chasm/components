@@ -1,0 +1,39 @@
+---
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  accept,
+  capture,
+  field = "file-input",
+  form,
+  id = generateShortId(),
+  labelledBy,
+  multiple,
+  name,
+  required,
+  type: _type,
+  value,
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+
+const inputAttrs = mapAttributes(attrs, ["file-input"]);
+const wrapperAttrs = mapAttributes(wrapper, ["file-input-wrapper"]);
+---
+
+<span {...wrapperAttrs}>
+  <input
+    {accept}
+    {...inputAttrs}
+    aria-labelledby={labelledBy}
+    {capture}
+    {form}
+    {id}
+    {multiple}
+    {name}
+    {required}
+    type="file"
+    {value}
+  />
+</span>

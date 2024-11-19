@@ -1,0 +1,63 @@
+---
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import FieldWrapper from "../FieldWrapper/index.astro";
+import TimeZoneSelect from "../elements/TimeZoneSelect/index.astro";
+
+const {
+  autocomplete,
+  autocorrect: _autocorrect,
+  countries,
+  exclude,
+  field = "time-zone-field",
+  form,
+  help,
+  id = generateShortId(),
+  include,
+  includeNull,
+  label = "Time zone",
+  legend,
+  message,
+  name,
+  outer,
+  required,
+  tag,
+  type: _type,
+  useList,
+  value,
+  wrapper = {},
+} = Astro.props;
+---
+
+<FieldWrapper
+  {field}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => {
+      return (
+        <TimeZoneSelect
+          {autocomplete}
+          {countries}
+          {exclude}
+          {form}
+          {id}
+          {include}
+          {includeNull}
+          {labelledBy}
+          {name}
+          {required}
+          selected={value}
+          {useList}
+          {wrapper}
+        />
+      );
+    }
+  }
+</FieldWrapper>

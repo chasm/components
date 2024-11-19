@@ -1,0 +1,28 @@
+---
+import "./index.css";
+import generateShortId from "../utilities/generateShortId/index.ts";
+import mapAttributes from "../utilities/mapAttributes/index.ts";
+
+const {
+  action,
+  autocorrect: _autocorrect,
+  form: _form,
+  id: form = generateShortId(),
+  labelledBy,
+  method = "post",
+  validation = "default",
+  ...attrs
+} = Astro.props;
+
+const formAttrs = mapAttributes(attrs, ["form"]);
+
+const content = await Astro.slots.render("default", [form]);
+const aria = labelledBy ? { "aria-labelledBy": labelledBy } : {};
+const validate =
+  validation === "default" ? {} : { [`data-sb-${validation}`]: true };
+---
+
+<form {...formAttrs} {...aria} {action} id={form} {method} {...validate}>
+  <input name="_charset_" type="hidden" />
+  <Fragment set:html={content} />
+</form>

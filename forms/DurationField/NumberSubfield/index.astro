@@ -1,0 +1,45 @@
+---
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  disabled,
+  field,
+  form,
+  id: parentId,
+  inputmode = "numeric",
+  label,
+  labelledBy,
+  outer = {},
+  parent,
+  name,
+  size = 4,
+  step = 1,
+  tag = {},
+  value,
+  ...attrs
+} = Astro.props;
+
+const elemAttrs = mapAttributes(attrs, [`input-${name}`]);
+const outerAttrs = mapAttributes(outer, [`label-${name}`]);
+const tagAttrs = mapAttributes(tag, [`label-tag-${name}`]);
+
+const id = `${parentId}_${name}`;
+---
+
+<label {...outerAttrs} for={id}>
+  <span {...tagAttrs} id={`${id}_label`}>{label}</span>
+  <input
+    {...elemAttrs}
+    aria-labelledby={`${labelledBy} ${id}_label`}
+    {disabled}
+    {form}
+    {id}
+    {inputmode}
+    min="0"
+    name={`${parent}:${name}`}
+    {size}
+    {step}
+    type="number"
+    {value}
+  />
+</label>

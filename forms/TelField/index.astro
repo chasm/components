@@ -1,0 +1,91 @@
+---
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+import FieldsetWrapper from "../FieldsetWrapper/index.astro";
+import CallingCodeSelect from "../elements/CallingCodeSelect/index.astro";
+import TelInput from "../elements/TelInput/index.astro";
+
+const {
+  autocorrect: _autocorrect,
+  code = {},
+  codeWrapper = {},
+  datalist = {},
+  disabled,
+  exclude = [],
+  field = "tel-field",
+  form,
+  group,
+  help,
+  id = generateShortId(),
+  include = [],
+  includeCode,
+  includeNull,
+  inputmode = "tel",
+  label = "Phone",
+  legend,
+  line = {},
+  lineWrapper = {},
+  list,
+  message,
+  name,
+  outer,
+  placeholder: _placeholder,
+  required,
+  tag,
+} = Astro.props;
+
+const codeAttrs = mapAttributes(code, ["calling-code-select"]);
+const lineAttrs = mapAttributes(line, ["line-number-input"]);
+---
+
+<FieldsetWrapper
+  {disabled}
+  {field}
+  {form}
+  {group}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  name={`${name}:wrapper`}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => (
+      <>
+        {includeCode ? (
+          <CallingCodeSelect
+            {...codeAttrs}
+            {disabled}
+            {exclude}
+            {form}
+            id={`${id}_code`}
+            {include}
+            {includeNull}
+            {labelledBy}
+            name={`${name}:code`}
+            {required}
+            wrapper={codeWrapper}
+          />
+        ) : null}
+        <TelInput
+          {...lineAttrs}
+          {datalist}
+          {disabled}
+          {field}
+          {form}
+          id={`${id}${includeCode ? "_line" : ""}`}
+          {inputmode}
+          {labelledBy}
+          {list}
+          name={`${name}${includeCode ? ":line" : ""}`}
+          {required}
+          wrapper={lineWrapper}
+        />
+      </>
+    )
+  }
+</FieldsetWrapper>

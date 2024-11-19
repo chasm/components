@@ -1,36 +1,25 @@
 ---
 import "./index.css";
 
-import Abbr from "../../widgets/Abbr/index.astro";
 import Body from "../../html/Body/index.astro";
 import Footer from "../../landmarks/Footer/index.astro";
 import Head from "../../html/Head/index.astro";
 import Header from "../../landmarks/Header/index.astro";
 import Html from "../../html/index.astro";
 import Main from "../../landmarks/Main/index.astro";
-import Toggletip from "../../widgets/Toggletip/index.astro";
-import Tooltip from "../../widgets/Tooltip/index.astro";
 ---
 
 <Html>
   <Head
-    metadata={{ title: "Sidereal Components" }}
-    site="Sidereal Components"
+    metadata={{ title: "Munat Component Library" }}
+    site="@munat/components"
   />
   <Body>
     <Header>
-      <h1>Sidereal Components</h1>
+      <h1>Munat Component Library</h1>
     </Header>
     <Main>
-      <p>
-        Who is the man who would work for the <Abbr
-          title="Committee to RE-Elect the President">CREEP</Abbr
-        > against his brother man? Shaft!
-      </p>
-      <Toggletip title="When in the course of human events ...">i</Toggletip>
-      <Tooltip tip="You can't always get what you want."
-        >Bob's yer uncle.</Tooltip
-      >
+      <p>Astro components in vanilla JS.</p>
     </Main>
     <Footer><p>Copyright 2024 Munat, Ltd.</p></Footer>
   </Body>

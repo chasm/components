@@ -3,12 +3,12 @@ import "./index.css";
 
 import type { HTMLAttributes, HTMLTag } from "astro/types";
 
-import generateShortId from "../../utilities/generateShortId";
+import generateShortId from "../../utilities/generateShortId/index.ts";
 
 export type Props = HTMLAttributes<"div"> & {
-	as?: HTMLTag | undefined;
-	label?: string | undefined;
-	link?: HTMLAttributes<"a"> | undefined;
+  as?: HTMLTag | undefined;
+  label?: string | undefined;
+  link?: HTMLAttributes<"a"> | undefined;
 };
 
 const { as = "div", label, link = {}, ...props } = Astro.props;
@@ -18,20 +18,20 @@ const Component = as;
 const { pathname } = Astro.url;
 
 const attrs = Object.assign(
-	{
-		class: "linked-logo",
-		id: generateShortId(),
-	},
-	props,
+  {
+    class: "linked-logo",
+    id: generateShortId(),
+  },
+  props
 );
 
 const linkAttrs = Object.assign(
-	{
-		class: "logo",
-		href: "/",
-		title: "To the home page.",
-	},
-	link,
+  {
+    class: "logo",
+    href: "/",
+    title: "To the home page.",
+  },
+  link
 );
 
 const useLink = Boolean(pathname.replace(/\/$/, ""));
@@ -40,13 +40,13 @@ const logo = (await Astro.slots.render("default")) || label;
 ---
 
 <Component {...attrs}>
-	{
-		useLink ? (
-			<a {...linkAttrs}>
-				<Fragment set:html={logo} />
-			</a>
-		) : (
-			<Fragment set:html={logo} />
-		)
-	}
+  {
+    useLink ? (
+      <a {...linkAttrs}>
+        <Fragment set:html={logo} />
+      </a>
+    ) : (
+      <Fragment set:html={logo} />
+    )
+  }
 </Component>

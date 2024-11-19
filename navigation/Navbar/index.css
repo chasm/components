@@ -1,4 +1,4 @@
-body > aside[aria-label] {
+body > aside[aria-label="Navigation"] {
 	background-color: var(--navbar-background-color, white);
 	border-bottom: var(--navbar-border-bottom, none);
 	border-top: var(--navbar-border-top, none);

@@ -1,0 +1,60 @@
+---
+import "./index.css";
+
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+
+const {
+  field,
+  group,
+  help = {},
+  id,
+  label,
+  legend = {},
+  message,
+  outer = {},
+  required,
+  tag = {},
+} = Astro.props;
+
+const groupAttrs = group && mapAttributes(group, ["help"]);
+const helpAttrs = mapAttributes(help, ["help"]);
+const legendAttrs = mapAttributes(legend, ["label"]);
+const outerAttrs = mapAttributes(
+  outer,
+  required ? ["field", `${field}`, "required"] : ["field", `${field}`]
+);
+const tagAttrs = mapAttributes(
+  tag,
+  required ? ["label-tag"] : ["label-tag", "optional"]
+);
+
+const hlp = (await Astro.slots.render("message")) || message;
+const helpId = `${id}_help`;
+const lbl = (await Astro.slots.render("label")) || label;
+const labelId = `${id}_label_tag`;
+const labelledBy = `${labelId} ${helpId}`;
+
+const element = await Astro.slots.render("default", [labelledBy]);
+---
+
+<div {...outerAttrs}>
+  <label {...legendAttrs} for={id}>
+    <span {...tagAttrs} id={labelId} set:html={lbl} />
+    <span
+      aria-live="assertive"
+      {...helpAttrs}
+      id={helpId}
+      role="status"
+      set:html={hlp}
+    /><br />
+  </label>
+  {
+    group ? (
+      <div {...groupAttrs}>
+        <Fragment set:html={element} />
+      </div>
+    ) : (
+      <Fragment set:html={element} />
+    )
+  }
+</div>

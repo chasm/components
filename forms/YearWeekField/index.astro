@@ -1,0 +1,89 @@
+---
+// Most years have 52 weeks, but if the year starts on a Thursday
+// or is a leap year that starts on a Wednesday, that particular year
+// will have 53 numbered weeks.
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+import FieldsetWrapper from "../FieldsetWrapper/index.astro";
+import WeekSelect from "../elements/WeekSelect/index.astro";
+import YearInput from "../elements/YearInput/index.astro";
+
+const {
+  disabled,
+  field = "plain-year-week-field",
+  form,
+  group,
+  help,
+  id = generateShortId(),
+  includeNull,
+  inputmode = "numeric",
+  label = "Year and week",
+  legend,
+  message,
+  name = "plainYearMonth",
+  outer,
+  required,
+  tag,
+  week = "",
+  weekAttrs = {},
+  weeks,
+  year = "",
+  yearAttrs = {},
+  years,
+} = Astro.props;
+
+const weekAttributes = mapAttributes(weekAttrs, ["year-week-field-year"]);
+const yearAttributes = mapAttributes(yearAttrs, ["year-week-field-week"]);
+---
+
+<FieldsetWrapper
+  {disabled}
+  {field}
+  {form}
+  {group}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  name={`${name}:wrapper`}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => (
+      <>
+        <label for={`${id}_year`}>
+          <span id={`${id}_year:label`}>Year</span>
+          <YearInput
+            {...yearAttributes}
+            {form}
+            id={`${id}_year`}
+            {inputmode}
+            {includeNull}
+            labelledBy={`${labelledBy} ${id}_year:label`}
+            name={`${name}:year`}
+            {required}
+            value={year}
+            {years}
+          />
+        </label>
+        <label for={`${id}_week`}>
+          <span id={`${id}_week:label`}>Week</span>
+          <WeekSelect
+            {...weekAttributes}
+            {form}
+            id={`${id}_week`}
+            {includeNull}
+            labelledBy={`${labelledBy} ${id}_week:label`}
+            name={`${name}:week`}
+            {required}
+            value={week}
+            {weeks}
+          />
+        </label>
+      </>
+    )
+  }
+</FieldsetWrapper>

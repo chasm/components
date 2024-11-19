@@ -2,6 +2,7 @@
 import "./index.css";
 
 import type { HTMLAttributes } from "astro/types";
+
 import type { AstroPage } from "../../types.ts";
 
 export type Props = HTMLAttributes<"nav"> & {
@@ -29,15 +30,19 @@ const label =
   pages.find(page => page.url === href)?.metadata?.label || l || "Up";
 
 const arrow = await Astro.slots.render("arrow");
+
+const notHome = Astro.url.pathname.length > 1;
 ---
 
-<nav aria-label="Link to parent page." {...attrs}>
-  {
-    href && href.length ? (
-      <>
-        <Fragment set:html={arrow} />
-        <a href={href}>{href === "/" ? "Home" : label}</a>
-      </>
-    ) : undefined
-  }
-</nav>
+{
+  notHome ? (
+    <nav aria-label="Link to parent page." {...attrs}>
+      {href && href.length ? (
+        <>
+          <Fragment set:html={arrow} />
+          <a href={href}>{href === "/" ? "Home" : label}</a>
+        </>
+      ) : undefined}
+    </nav>
+  ) : undefined
+}

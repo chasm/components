@@ -1,0 +1,56 @@
+---
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+
+const {
+  disabled,
+  field,
+  form,
+  group = {},
+  help = {},
+  id,
+  label,
+  legend = {},
+  message,
+  name,
+  outer = {},
+  required,
+  tag = {},
+} = Astro.props;
+
+const groupAttrs = mapAttributes(group, ["group"]);
+const helpAttrs = mapAttributes(help, ["help"]);
+const legendAttrs = mapAttributes(legend, ["label"]);
+const outerAttrs = mapAttributes(
+  outer,
+  required ? ["fieldset", `${field}`, "required"] : ["fieldset", `${field}`]
+);
+const tagAttrs = mapAttributes(
+  tag,
+  required ? ["label-tag"] : ["label-tag", "optional"]
+);
+
+const hlp = (await Astro.slots.render("message")) || message;
+const helpId = `${id}_help`;
+const lbl = (await Astro.slots.render("label")) || label;
+const labelId = `${id}_label_tag`;
+const labelledBy = `${labelId} ${helpId}`;
+const legendId = `${id}_legend`;
+
+const element = await Astro.slots.render("default", [labelledBy]);
+---
+
+<fieldset {...outerAttrs} {disabled} {form} {name}>
+  <legend {...legendAttrs} id={legendId}>
+    <span {...tagAttrs} id={labelId} set:html={lbl} />
+    <span
+      aria-live="assertive"
+      {...helpAttrs}
+      id={helpId}
+      role="status"
+      set:html={hlp}
+    />
+  </legend>
+  <div {...groupAttrs}>
+    <Fragment set:html={element} />
+  </div>
+</fieldset>

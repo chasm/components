@@ -1,0 +1,58 @@
+---
+import createListOptions from "../../../utilities/createListOptions/index.ts";
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  autocomplete,
+  autocorrect: _autocorrect,
+  datalist = {},
+  field = "number-input",
+  form,
+  id = generateShortId(),
+  inputmode = "numeric",
+  isInteger,
+  labelledBy,
+  list,
+  name,
+  placeholder: _placeholder,
+  required,
+  step: stp,
+  type: _type,
+  value,
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+
+const datalistAttrs = mapAttributes(datalist, ["datalist"]);
+const inputAttrs = mapAttributes(attrs, ["number-input"]);
+const wrapperAttrs = mapAttributes(wrapper, ["number-input-wrapper"]);
+
+const listId = `${id}_list`;
+const lst = list ? { list: listId } : {};
+const step = isInteger ? Number.parseInt(String(stp), 10) || 1 : stp;
+---
+
+<span {...wrapperAttrs}>
+  <input
+    {...inputAttrs}
+    aria-labelledby={labelledBy}
+    {autocomplete}
+    {form}
+    {id}
+    {inputmode}
+    {...lst}
+    {name}
+    {required}
+    {step}
+    type="number"
+    {value}
+  />
+  {
+    list ? (
+      <datalist {...datalistAttrs} id={listId}>
+        <Fragment set:html={createListOptions(list)} />
+      </datalist>
+    ) : null
+  }
+</span>

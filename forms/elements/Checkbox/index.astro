@@ -1,0 +1,40 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+export type Props = HTMLAttributes<"input"> & {
+  labelledBy?: string | undefined;
+  label?: string | undefined;
+  wrapper?: HTMLAttributes<"label"> | undefined;
+};
+
+const {
+  id = generateShortId(),
+  labelledBy,
+  label: lbl,
+  type: _type,
+  wrapper = {},
+  ...props
+} = Astro.props;
+
+const labelId = `${id}_label`;
+const label = (await Astro.slots.render("default")) || lbl;
+
+const wrapperAttrs = mapAttributes(wrapper, ["checkbox"]);
+const attrs = mapAttributes(props, ["checkbox-input"]);
+---
+
+<label {...wrapperAttrs} id={labelId}>
+  <input
+    {...attrs}
+    aria-labelledby={`${labelledBy ? `${labelledBy} ` : ""}${labelId}`}
+    {id}
+    type="checkbox"
+  />
+  <Fragment set:html={label} />
+</label>

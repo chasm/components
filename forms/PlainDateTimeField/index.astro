@@ -1,0 +1,94 @@
+---
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+import FieldsetWrapper from "../FieldsetWrapper/index.astro";
+import DateInput from "../elements/DateInput/index.astro";
+import TimeInput from "../elements/TimeInput/index.astro";
+
+const {
+  date = "",
+  dateAttrs = {},
+  disabled,
+  field = "plain-date-time-field",
+  form,
+  group,
+  help,
+  id = generateShortId(),
+  inputmode = "numeric",
+  label = "Date and time",
+  legend,
+  maxDate,
+  maxTime,
+  message,
+  minDate,
+  minTime,
+  name,
+  outer,
+  required,
+  stepDate,
+  stepTime,
+  tag,
+  time = "",
+  timeAttrs = {},
+} = Astro.props;
+
+const dateAttributes = mapAttributes(dateAttrs, []);
+const timeAttributes = mapAttributes(timeAttrs, []);
+---
+
+<FieldsetWrapper
+  {disabled}
+  {field}
+  {form}
+  {group}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  name={`${name}:wrapper`}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => (
+      <>
+        <label for={`${id}_date`}>
+          <span id={`${id}_date:label`}>Date</span>
+          <DateInput
+            {...dateAttributes}
+            {disabled}
+            {form}
+            id={`${id}_date`}
+            {inputmode}
+            labelledBy={`${labelledBy} ${id}_date:label`}
+            {...(maxDate ? { max: maxDate } : {})}
+            {...(minDate ? { min: minDate } : {})}
+            name={`${name}:date`}
+            {required}
+            {...(stepDate ? { step: stepDate } : {})}
+            value={date}
+          />
+        </label>
+        <label for={`${id}_time`}>
+          <span id={`${id}_time:label`}>Time</span>
+          <TimeInput
+            {...timeAttributes}
+            {disabled}
+            {form}
+            id={`${id}_time`}
+            {inputmode}
+            labelledBy={`${labelledBy} ${id}_time:label`}
+            {...(maxTime ? { max: maxTime } : {})}
+            {...(minTime ? { min: minTime } : {})}
+            name={`${name}:time`}
+            {required}
+            {...(stepTime ? { step: stepTime } : {})}
+            value={time}
+          />
+        </label>
+      </>
+    )
+  }
+</FieldsetWrapper>

@@ -1,0 +1,41 @@
+---
+import generateShortId from "../../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../../utilities/mapAttributes/index.ts";
+
+const {
+  checked,
+  field = "radio-input",
+  form,
+  groupLabelId,
+  id = generateShortId(),
+  label,
+  labelledBy,
+  name,
+  required,
+  type: _type,
+  value,
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+
+const inputAttrs = mapAttributes(attrs, ["radio-input"]);
+const wrapperAttrs = mapAttributes(wrapper, ["radio-input-wrapper"]);
+
+const labelId = `${id}_label`;
+const lbl = (await Astro.slots.render("default")) || label;
+---
+
+<label {...wrapperAttrs} id={labelId}>
+  <input
+    {...inputAttrs}
+    aria-labelledby={`${labelledBy} ${labelId}`}
+    {checked}
+    {form}
+    {id}
+    {name}
+    {required}
+    type="radio"
+    {value}
+  />
+  <Fragment set:html={lbl} />
+</label>

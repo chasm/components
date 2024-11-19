@@ -1,14 +1,15 @@
 ---
-import type { HTMLAttributes } from "astro/types";
 import type { Anchor, AstroPage } from "../../types.ts";
+
+import type { HTMLAttributes } from "astro/types";
 
 import Nav from "../Nav/index.astro";
 
 import getPaths from "../../utilities/getPaths";
 
 export type Props = HTMLAttributes<"aside"> & {
-	pages: Array<AstroPage>;
-	separator?: string | undefined;
+  pages: Array<AstroPage>;
+  separator?: string | undefined;
 };
 
 const { pages, separator = "/", ...props } = Astro.props;
@@ -18,28 +19,28 @@ const { pathname } = Astro.url;
 const paths = ["/"].concat(getPaths(pathname));
 
 const meta: Record<string, Anchor> = pages
-	.filter(page => paths.includes(page.url || "/"))
-	.reduce(
-		(out, page) => {
-			if (page.url != null) {
-				out[page.url || "/"] = Object.assign(page.metadata, {
-					href: page.url || "/",
-				});
-			}
+  .filter(page => paths.includes(page.url || "/"))
+  .reduce(
+    (out, page) => {
+      if (page.url != null) {
+        out[page.url || "/"] = Object.assign(page.metadata, {
+          href: page.url || "/",
+        });
+      }
 
-			return out;
-		},
-		{} as Record<string, Anchor>,
-	);
+      return out;
+    },
+    {} as Record<string, Anchor>
+  );
 
 const links = paths.map(path => meta[path]) as Array<Anchor>;
 ---
 
 <Nav
-	as="ol"
-	class="breadcrumb-trail"
-	id="trail"
-	{...props}
-	{links}
-	{separator}
+  as="ol"
+  class="breadcrumb-trail"
+  id="trail"
+  {...props}
+  {links}
+  {separator}
 />

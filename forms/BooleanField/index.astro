@@ -1,0 +1,24 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+import Checkbox from "../elements/Checkbox/index.astro";
+
+export type Props = HTMLAttributes<"input"> & {
+  label?: string | undefined;
+  wrapper?: HTMLAttributes<"div"> | undefined;
+};
+
+const {
+  autocorrect: _autocorrect,
+  label: lbl,
+  placeholder: _placeholder,
+  wrapper = {},
+  ...props
+} = Astro.props;
+
+const label = (await Astro.slots.render("default")) || lbl;
+---
+
+<Checkbox {...props} class="field boolean-field" {label} {wrapper} />

@@ -1,0 +1,114 @@
+---
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import FieldsetWrapper from "../FieldsetWrapper/index.astro";
+import DateInput from "../elements/DateInput/index.astro";
+import TimeInput from "../elements/TimeInput/index.astro";
+import TimeZoneSelect from "../elements/TimeZoneSelect/index.astro";
+
+const {
+  countries,
+  date = "",
+  dateAttrs,
+  disabled,
+  field = "zoned-date-time-field",
+  form,
+  group,
+  help,
+  id = generateShortId(),
+  includeNull,
+  inputmode = "numeric",
+  label = "Date and time with time zone",
+  legend,
+  maxDate,
+  maxTime,
+  message,
+  minDate,
+  minTime,
+  name,
+  outer,
+  required,
+  stepDate,
+  stepTime,
+  tag,
+  time = "",
+  timeAttrs,
+  timeZone = "",
+  timeZoneAttrs,
+  useList,
+} = Astro.props;
+---
+
+<FieldsetWrapper
+  {disabled}
+  {field}
+  {form}
+  {group}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  name={`${name}:wrapper`}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => {
+      return (
+        <>
+          <label for={`${id}_date`}>
+            <span id={`${id}_date:label`}>Date</span>
+            <DateInput
+              {disabled}
+              {form}
+              id={`${id}_date`}
+              {inputmode}
+              labelledBy={`${labelledBy} ${id}_date:label`}
+              {...(maxDate ? { max: maxDate } : {})}
+              {...(minDate ? { min: minDate } : {})}
+              name={`${name}:date`}
+              {required}
+              {...(stepDate ? { step: stepDate } : {})}
+              value={date}
+              wrapper={dateAttrs}
+            />
+          </label>
+          <label for={`${id}_time`}>
+            <span id={`${id}_time:label`}>Time</span>
+            <TimeInput
+              {disabled}
+              {form}
+              id={`${id}_time`}
+              {inputmode}
+              labelledBy={`${labelledBy} ${id}_time:label`}
+              {...(maxTime ? { max: maxTime } : {})}
+              {...(minTime ? { min: minTime } : {})}
+              name={`${name}:time`}
+              {required}
+              {...(stepTime ? { step: stepTime } : {})}
+              value={time}
+              wrapper={timeAttrs}
+            />
+          </label>
+          <label for={`${id}_time-zone`}>
+            <span id={`${id}_time-zone:label`}>Time zone</span>
+            <TimeZoneSelect
+              {countries}
+              {disabled}
+              {form}
+              id={`${id}_timeZone`}
+              {includeNull}
+              labelledBy={`${labelledBy} ${id}_time-zone:label`}
+              name={`${name}:timeZone`}
+              {required}
+              selected={timeZone}
+              {useList}
+              wrapper={timeZoneAttrs}
+            />
+          </label>
+        </>
+      );
+    }
+  }
+</FieldsetWrapper>

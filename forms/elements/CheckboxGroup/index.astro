@@ -1,0 +1,71 @@
+---
+import type { Options } from "../../types.ts";
+
+import Checkbox from "../Checkbox/index.astro";
+import FieldsetWrapper from "../../FieldsetWrapper/index.astro";
+
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  disabled,
+  field = "checkbox-group",
+  form,
+  group,
+  help,
+  id = generateShortId(),
+  label,
+  legend,
+  message,
+  name,
+  options,
+  outer,
+  required,
+  selected = [],
+  tag,
+  wrapper,
+} = Astro.props;
+---
+
+<FieldsetWrapper
+  {disabled}
+  {field}
+  {form}
+  {group}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  name={`${name}:wrapper`}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => {
+      return (options as Options).map(
+        ({ form: f, label, name: n, value, ...attrs }) => {
+          const inputAttrs = mapAttributes(attrs, ["sb-checkbox-input"]);
+
+          return (
+            <Checkbox
+              {...inputAttrs}
+              checked={Array.from([selected || []])
+                .flatMap(item => item)
+                .includes(value || "")}
+              {disabled}
+              {form}
+              {labelledBy}
+              name={(name || n) as string}
+              value={value as string}
+              {wrapper}
+            >
+              <Fragment set:html={label} />
+            </Checkbox>
+          );
+        }
+      );
+    }
+  }
+</FieldsetWrapper>

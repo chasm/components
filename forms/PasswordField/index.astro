@@ -1,0 +1,68 @@
+---
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+import FieldWrapper from "../FieldWrapper/index.astro";
+import PasswordInput from "../elements/PasswordInput/index.astro";
+
+const {
+  allowAutocomplete,
+  allowUnmasked,
+  field = "password-field",
+  form,
+  help = {},
+  id = generateShortId(),
+  inputmode = "text",
+  isNewPassword,
+  label = "Password",
+  legend = {},
+  message,
+  name,
+  outer = {},
+  required,
+  tag = {},
+  value,
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+
+const pwAttrs = mapAttributes(attrs, []);
+
+const autocomplete = allowAutocomplete
+  ? isNewPassword
+    ? "new-password"
+    : "current-password"
+  : "off";
+---
+
+<FieldWrapper
+  {field}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => {
+      return (
+        <PasswordInput
+          {...pwAttrs}
+          {allowUnmasked}
+          {autocomplete}
+          {field}
+          {form}
+          {id}
+          {inputmode}
+          {labelledBy}
+          {required}
+          {name}
+          {value}
+          {wrapper}
+        />
+      );
+    }
+  }
+</FieldWrapper>

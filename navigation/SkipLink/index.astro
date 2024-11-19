@@ -4,16 +4,16 @@ import "./index.css";
 import type { HTMLAttributes } from "astro/types";
 
 export type Props = HTMLAttributes<"a"> & {
-	label?: string | undefined;
+  label?: string | undefined;
 };
 
 const { href, label = "Skip to content", ...props } = Astro.props;
 
 const attrs = Object.assign(
-	{
-		class: "skip-link",
-	},
-	props,
+  {
+    class: "skip-link",
+  },
+  props
 );
 ---
 

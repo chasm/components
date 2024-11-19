@@ -1,0 +1,52 @@
+---
+import createListOptions from "../../../utilities/createListOptions/index.ts";
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  autocomplete,
+  "class:list": elementClassList = [],
+  datalist = {},
+  dataset: elementDataset = {},
+  field = "color-input",
+  form,
+  id = generateShortId(),
+  labelledBy,
+  list,
+  name,
+  required,
+  type: _type,
+  value,
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+
+const datalistAttrs = mapAttributes(datalist, ["color-input-datalist"]);
+const inputAttrs = mapAttributes(attrs, ["color-input"]);
+const wrapperAttrs = mapAttributes(wrapper, ["color-input-wrapper"]);
+
+const listId = `${id}_list`;
+const lst = list ? { list: listId } : {};
+---
+
+<span {...wrapperAttrs}>
+  <input
+    {...inputAttrs}
+    aria-labelledby={labelledBy}
+    {autocomplete}
+    {form}
+    {id}
+    {...lst}
+    {name}
+    {required}
+    type="color"
+    {value}
+  />
+  {
+    list ? (
+      <datalist {...datalistAttrs} id={listId}>
+        <Fragment set:html={createListOptions(list)} />
+      </datalist>
+    ) : null
+  }
+</span>

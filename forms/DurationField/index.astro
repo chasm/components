@@ -1,0 +1,86 @@
+---
+import { Temporal } from "temporal-polyfill";
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import FieldsetWrapper from "../FieldsetWrapper/index.astro";
+import NumberSubfield from "./NumberSubfield/index.astro";
+
+const {
+  disabled,
+  field = "duration-field",
+  form,
+  group,
+  help,
+  id = generateShortId(),
+  includeDays,
+  includeHours,
+  includeMicroseconds,
+  includeMilliseconds,
+  includeMinutes,
+  includeMonths,
+  includeNanoseconds,
+  includeSeconds,
+  includeYears,
+  label = "Duration",
+  legend,
+  message,
+  name: parent,
+  outer,
+  required,
+  tag,
+  value,
+} = Astro.props;
+
+const dur = value
+  ? Temporal.Duration.from(value)
+  : ({} as Temporal.DurationLike);
+
+const fields = [
+  ...(includeYears ? [["Years", "years", dur.years]] : []),
+  ...(includeMonths ? [["Months", "months", dur.months]] : []),
+  ...(includeDays ? [["Days", "days", dur.days]] : []),
+  ...(includeHours ? [["Hours", "hours", dur.hours]] : []),
+  ...(includeMinutes ? [["Minutes", "minutes", dur.minutes]] : []),
+  ...(includeSeconds ? [["Seconds", "seconds", dur.seconds]] : []),
+  ...(includeMilliseconds
+    ? [["Millis", "milliseconds", dur.milliseconds]]
+    : []),
+  ...(includeMicroseconds
+    ? [["Micros", "microseconds", dur.microseconds]]
+    : []),
+  ...(includeNanoseconds ? [["Nanoss", "nanoseconds", dur.nanoseconds]] : []),
+];
+---
+
+<FieldsetWrapper
+  {field}
+  {form}
+  {group}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => (
+      <>
+        {fields.map(([label, name, value]) => (
+          <NumberSubfield
+            {disabled}
+            {field}
+            {form}
+            {id}
+            label={label as string}
+            {labelledBy}
+            {parent}
+            name={name as string}
+            {value}
+          />
+        ))}
+      </>
+    )
+  }
+</FieldsetWrapper>

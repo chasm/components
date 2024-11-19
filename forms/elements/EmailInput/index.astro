@@ -1,0 +1,55 @@
+---
+import createListOptions from "../../../utilities/createListOptions/index.ts";
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  autocomplete,
+  autocorrect: _autocorrect,
+  datalist,
+  field = "email-input",
+  form,
+  id = generateShortId(),
+  inputmode = "email",
+  labelledBy,
+  list,
+  name,
+  placeholder: _placeholder,
+  required,
+  type: _type,
+  value,
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+
+const datalistAttrs = mapAttributes(datalist, ["datalist"]);
+const inputAttrs = mapAttributes(attrs, ["email-input"]);
+const wrapperAttrs = mapAttributes(wrapper, ["email-input-wrapper"]);
+
+const listId = `${id}_list`;
+const lst = list ? { list: listId } : {};
+---
+
+<span {...wrapperAttrs}>
+  <input
+    {...inputAttrs}
+    adapt-symbol="23485"
+    aria-labelledby={labelledBy}
+    {autocomplete}
+    {form}
+    {id}
+    {inputmode}
+    {...lst}
+    {name}
+    {required}
+    type="email"
+    {value}
+  />
+  {
+    list ? (
+      <datalist {...datalistAttrs} id={listId}>
+        <Fragment set:html={createListOptions(list)} />
+      </datalist>
+    ) : null
+  }
+</span>

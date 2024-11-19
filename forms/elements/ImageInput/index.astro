@@ -1,0 +1,35 @@
+---
+// This will stupidly submit the form and can only be overridden with JS. Ugh.
+// Consider using the Button component and passing an image
+// unless the x and y coordinates are needed (probably not accessible)
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  alt,
+  field = "image-input",
+  form,
+  height,
+  id = generateShortId(),
+  labelledBy,
+  name,
+  src,
+  width,
+  ...attrs
+} = Astro.props;
+
+const inputAttrs = mapAttributes(attrs, ["image-input"]);
+---
+
+<input
+  {...inputAttrs}
+  {alt}
+  aria-labelledby={labelledBy}
+  {form}
+  {height}
+  {id}
+  {name}
+  {src}
+  type="image"
+  {width}
+/>

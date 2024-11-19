@@ -1,0 +1,33 @@
+---
+
+---
+
+<script>
+  (function () {
+    globalThis.addEventListener("DOMContentLoaded", function () {
+      const passwordFields = document.querySelectorAll("input.-sb-unmaskable");
+
+      [...passwordFields].forEach(element => {
+        const button = document.createElement("button");
+        button.classList.add("password-visibility");
+        button.setAttribute("aria-label", "Show password");
+        button.setAttribute("type", "button");
+        button.appendChild(document.createTextNode("Show"));
+
+        button.addEventListener("click", function () {
+          if (element.getAttribute("type") === "password") {
+            this.setAttribute("aria-label", "Hide password");
+            this.innerText = "Hide";
+            element.setAttribute("type", "text");
+          } else {
+            this.setAttribute("aria-label", "Show password");
+            this.innerText = "Show";
+            element.setAttribute("type", "password");
+          }
+        });
+
+        element.parentNode?.appendChild(button);
+      });
+    });
+  })();
+</script>

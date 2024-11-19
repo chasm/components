@@ -1,0 +1,64 @@
+---
+import createListOptions from "../../../utilities/createListOptions/index.ts";
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  autocomplete,
+  autocorrect: _autocorrect,
+  datalist = {},
+  field = "year-input",
+  form,
+  id = generateShortId(),
+  inputmode = "numeric",
+  labelledBy,
+  list,
+  maxlength = 4,
+  minlength = 4,
+  name = "year",
+  pattern = "[1-9][0-9]{1,3}",
+  placeholder: _placeholder,
+  required,
+  size: sze,
+  type: _type,
+  value,
+  wrapper = {},
+  years,
+  ...attrs
+} = Astro.props;
+
+const datalistAttrs = mapAttributes(datalist, ["datalist"]);
+const inputAttrs = mapAttributes(attrs, ["year-input"]);
+const wrapperAttrs = mapAttributes(wrapper, ["year-input-wrapper"]);
+
+const listId = `${id}_list`;
+const lst = list ? { list: listId } : {};
+const size = sze || years ? 7 : 4;
+---
+
+<span {...wrapperAttrs}>
+  <input
+    {...inputAttrs}
+    {autocomplete}
+    aria-labelledby={labelledBy}
+    {id}
+    {inputmode}
+    {form}
+    {...lst}
+    {maxlength}
+    {minlength}
+    {name}
+    pattern={pattern}
+    {required}
+    {size}
+    type="text"
+    {value}
+  />
+  {
+    list ? (
+      <datalist {...datalistAttrs} id={listId}>
+        <Fragment set:html={createListOptions(list)} />
+      </datalist>
+    ) : null
+  }
+</span>

@@ -2,6 +2,7 @@
 import "./index.css";
 
 import type { HTMLAttributes } from "astro/types";
+
 import type { AstroPage } from "../../types.ts";
 
 import getSiblingLinks from "./getSiblingLinks/";
@@ -41,7 +42,7 @@ const left = await Astro.slots.render("prev");
 const right = await Astro.slots.render("next");
 ---
 
-<nav {...attrs}>
+<nav aria-label="Links to next and previous pages" {...attrs}>
   <ul>
     <li class="previous-link">
       {

@@ -1,0 +1,54 @@
+---
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import not from "../../../utilities/not/index.ts";
+import toUpperCase from "../../../utilities/toUpperCase/index.ts";
+import Select from "../Select/index.astro";
+import callingCodes from "./callingCodes";
+
+const {
+  autocomplete,
+  exclude,
+  field = "calling-code-select",
+  form,
+  id = generateShortId(),
+  include,
+  includeNull,
+  labelledBy,
+  name,
+  required,
+  selected,
+  wrapper = {},
+} = Astro.props;
+
+const exc = exclude && (toUpperCase(exclude) as Array<string | number>);
+const inc = include && (toUpperCase(include) as Array<string | number>);
+
+const options = callingCodes.filter(({ alpha2, alpha3, numeric }) => {
+  return (
+    inc &&
+    (inc?.includes(alpha2) ||
+      inc?.includes(alpha3) ||
+      inc?.includes(numeric)) &&
+    not(
+      exc &&
+        (exc?.includes(alpha2) ||
+          exc?.includes(alpha3) ||
+          exc?.includes(numeric))
+    )
+  );
+});
+---
+
+<Select
+  {autocomplete}
+  {field}
+  {form}
+  {id}
+  {includeNull}
+  {labelledBy}
+  {name}
+  {options}
+  {required}
+  {selected}
+  {wrapper}
+/>

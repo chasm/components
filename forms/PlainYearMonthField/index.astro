@@ -1,0 +1,109 @@
+---
+import { Temporal } from "temporal-polyfill";
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+import FieldsetWrapper from "../FieldsetWrapper/index.astro";
+import MonthSelect from "../elements/MonthSelect/index.astro";
+import YearInput from "../elements/YearInput/index.astro";
+
+const {
+  calendar = "iso8601",
+  disabled,
+  era,
+  eraYear,
+  field = "year-month-field",
+  form,
+  format,
+  group,
+  help,
+  id = generateShortId(),
+  includeNull,
+  inputmode = "numeric",
+  label = "Year and month",
+  legend,
+  message,
+  month,
+  monthAttrs = {},
+  monthCode,
+  months,
+  name = "plainYearMonth",
+  outer,
+  plainYearMonth,
+  required,
+  tag,
+  year,
+  yearAttrs = {},
+  years,
+} = Astro.props;
+
+const yearAttributes = mapAttributes(yearAttrs, []);
+const monthAttributes = mapAttributes(monthAttrs, []);
+
+const val =
+  plainYearMonth ||
+  ((month || monthCode) && {
+    calendar,
+    ...(monthCode ? { monthCode } : { month }),
+    ...(era ? { era, eraYear } : { year }),
+  });
+
+const value =
+  val && Temporal.PlainYearMonth.from(val as Temporal.PlainYearMonthLike);
+
+const monthId = `${id}-month`;
+const monthName = `${name}:month`;
+const yearId = `${id}-year`;
+const yearName = `${name}:year`;
+---
+
+<FieldsetWrapper
+  {disabled}
+  {field}
+  {form}
+  {group}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  name={`${name}:wrapper`}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => (
+      <>
+        <label for={yearId}>
+          <span id={`${yearId}:label`}>Year</span>
+          <YearInput
+            {...yearAttributes}
+            {form}
+            id={yearId}
+            {inputmode}
+            labelledBy={`${labelledBy} ${yearId}:label`}
+            name={yearName}
+            {required}
+            value={(value as Temporal.PlainYearMonth)?.year}
+            years={years}
+          />
+        </label>
+        <label for={monthId}>
+          <span id={`${monthId}:label`}>Month</span>
+          <MonthSelect
+            {...monthAttributes}
+            {form}
+            {format}
+            id={monthId}
+            {includeNull}
+            labelledBy={`${labelledBy} ${monthId}:label`}
+            name={monthName}
+            {required}
+            value={(value as Temporal.PlainYearMonth)?.month}
+            months={months}
+          />
+        </label>
+      </>
+    )
+  }
+</FieldsetWrapper>

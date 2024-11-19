@@ -1,0 +1,50 @@
+---
+import { DEFAULT_LOCALES } from "../../../constants.ts";
+import createSelectOptions from "../../../utilities/createSelectOptions/index.ts";
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import getMonths from "../../../utilities/getMonths/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  autocomplete,
+  calendar = "iso8601",
+  field = "month-select",
+  form,
+  format = "long",
+  id = generateShortId(),
+  includeNull,
+  labelledBy,
+  locales = DEFAULT_LOCALES,
+  months,
+  name = "month",
+  required,
+  selected,
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+
+const selectAttrs = mapAttributes(attrs, ["month-select"]);
+const wrapperAttrs = mapAttributes(wrapper, ["month-select-wrapper"]);
+
+const mnths = getMonths(
+  calendar as string,
+  locales as Array<string>,
+  format,
+  months as Array<number>
+);
+---
+
+<span {...wrapperAttrs}>
+  <select
+    {...selectAttrs}
+    {autocomplete}
+    aria-labelledby={labelledBy}
+    {id}
+    {form}
+    {name}
+    {required}
+  >
+    {includeNull ? <option /> : null}
+    <Fragment set:html={createSelectOptions(mnths, selected)} />
+  </select>
+</span>

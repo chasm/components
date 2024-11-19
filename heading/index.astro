@@ -3,37 +3,47 @@ import "./index.css";
 
 import type { HTMLAttributes } from "astro/types";
 
-import generateShortId from "../utilities/generateShortId";
+import generateShortId from "../utilities/generateShortId/index.ts";
 
-export type Props = HTMLAttributes<"h1"> & {
-	header?: HTMLAttributes<"header"> | undefined;
-	level?: number;
+export type Props = HTMLAttributes<"header"> & {
+  h?: HTMLAttributes<"h1"> | undefined;
+  level?: number | undefined;
+  subtitle?: string | undefined;
+  title?: string | undefined;
 };
 
-const { header = {}, level = -1, ...props } = Astro.props;
+const { h = {}, level = -1, slot: _, subtitle, title, ...props } = Astro.props;
 
 const Hn = level > 0 && level < 7 ? `h${level}` : "h2";
 
-const content = await Astro.slots.render("default");
-const subtitle = await Astro.slots.render("subtitle");
+const content = (await Astro.slots.render("default")) || title;
+const sub = (await Astro.slots.render("subtitle")) || subtitle;
+const pre = await Astro.slots.render("pre-heading");
+const post = await Astro.slots.render("post-heading");
 
 const attrs = Object.assign(
-	{
-		id: generateShortId(),
-	},
-	props,
+  {
+    id: generateShortId(),
+  },
+  h
 );
 ---
 
-<header {...header}>
-	{
-		subtitle ? (
-			<hgroup>
-				<Hn {...attrs} set:html={content} />
-				<Fragment set:html={subtitle} />
-			</hgroup>
-		) : (
-			<Hn {...attrs} set:html={content} />
-		)
-	}
+<header {...props}>
+  <Fragment set:html={pre} />
+  {
+    subtitle ? (
+      <hgroup aria-roledescription="Heading group" role="group">
+        <Hn {...attrs} set:html={content} />
+        {sub ? (
+          <p aria-roledescription="subtitle" class="subtitle">
+            <Fragment set:html={sub} />
+          </p>
+        ) : undefined}
+      </hgroup>
+    ) : (
+      <Hn {...attrs} set:html={content} />
+    )
+  }
+  <Fragment set:html={post} />
 </header>

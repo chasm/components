@@ -1,9 +1,19 @@
-body > header {
+header {
 	background-color: var(--header-background-color, white);
 	border-bottom: var(--header-border-bottom, none);
 	border-top: var(--header-border-top, none);
 	color: var(--header-foreground-color, black);
 	margin: var(--header-margin, 0);
 	padding-block: var(--header-padding-block, 0.5rem 0.25rem);
-	padding-inline: var(--header-padding-inline, 2svw);
+	padding-inline: var(--header-padding-inline, 0);
+}
+
+body > header {
+	background-color: var(--landmark-header-background-color, white);
+	border-bottom: var(--landmark-header-border-bottom, none);
+	border-top: var(--landmark-header-border-top, none);
+	color: var(--landmark-header-foreground-color, black);
+	margin: var(--landmark-header-margin, 0);
+	padding-block: var(--landmark-header-padding-block, 0.5rem 0.25rem);
+	padding-inline: var(--landmark-header-padding-inline, 2svw);
 }

@@ -1,0 +1,48 @@
+---
+import createSelectOptions from "../../../utilities/createSelectOptions/index.ts";
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  autocomplete,
+  field = "select",
+  form,
+  id = generateShortId(),
+  includeNull,
+  labelledBy,
+  name,
+  options = [],
+  required,
+  selected,
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+
+const selectAttrs = mapAttributes(attrs, ["select"]);
+const wrapperAttrs = mapAttributes(wrapper, ["select-wrapper"]);
+
+const opts = await Astro.slots.render("default");
+---
+
+<span {...wrapperAttrs}>
+  <select
+    {...selectAttrs}
+    {autocomplete}
+    aria-labelledby={labelledBy}
+    {form}
+    {id}
+    {name}
+    {required}
+  >
+    {includeNull ? <option /> : null}
+    {
+      opts ? (
+        opts
+      ) : (
+        <Fragment
+          set:html={createSelectOptions(options, selected as string | number)}
+        />
+      )
+    }
+  </select>
+</span>

@@ -3,26 +3,26 @@ import "./index.css";
 
 import type { HTMLAttributes, HTMLTag } from "astro/types";
 
-import generateShortId from "../../utilities/generateShortId";
+import generateShortId from "../../utilities/generateShortId/index.ts";
 
 export type Props = HTMLAttributes<"aside"> & {
-	as?: HTMLTag | undefined;
-	label?: string | undefined;
+  as?: HTMLTag | undefined;
+  label?: string | undefined;
 };
 
 const {
-	as: Component = "aside",
-	id = generateShortId(),
-	label,
-	title,
-	...props
+  as: Component = "aside",
+  id = generateShortId(),
+  label,
+  title,
+  ...props
 } = Astro.props;
 
 const attrs = Object.assign(
-	{
-		class: "page-block",
-	},
-	props,
+  {
+    class: "page-block",
+  },
+  props
 );
 
 const ttl = (await Astro.slots.render("title ")) || title;
@@ -31,12 +31,12 @@ const aria = ttl ? { "aria-labelledby": id } : { "aria-label": label };
 ---
 
 <Component {...aria} {...attrs}>
-	{
-		ttl ? (
-			<header>
-				<h2 {id} set:html={title} />
-			</header>
-		) : undefined
-	}
-	<slot />
+  {
+    ttl ? (
+      <header>
+        <h2 {id} set:html={title} />
+      </header>
+    ) : undefined
+  }
+  <slot />
 </Component>

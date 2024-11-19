@@ -1,0 +1,62 @@
+---
+// import type { Options } from "../../types.ts";
+
+import filterTimeZoneOptions from "../../../utilities/filterTimeZoneOptions/index.ts";
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import Select from "../Select/index.astro";
+import TextInput from "../TextInput/index.astro";
+
+const {
+  autocomplete,
+  datalist,
+  exclude = [] as Array<string>,
+  field = "time-zone",
+  form,
+  id = generateShortId(),
+  include = [] as Array<string>,
+  includeNull,
+  labelledBy,
+  name,
+  required,
+  selected,
+  useList,
+  wrapper = {},
+} = Astro.props;
+
+const options = filterTimeZoneOptions(
+  exclude as Array<string | number>,
+  include as Array<string | number>
+);
+---
+
+{
+  useList ? (
+    <TextInput
+      {autocomplete}
+      {datalist}
+      {field}
+      {form}
+      {id}
+      {labelledBy}
+      {labelledBy}
+      {name}
+      {required}
+      {wrapper}
+      value={selected}
+    />
+  ) : (
+    <Select
+      {autocomplete}
+      {field}
+      {form}
+      {id}
+      {includeNull}
+      {labelledBy}
+      {name}
+      {options}
+      {required}
+      {selected}
+      {wrapper}
+    />
+  )
+}

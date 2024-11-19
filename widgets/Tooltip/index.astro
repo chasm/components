@@ -3,11 +3,11 @@ import "./index.css";
 
 import type { HTMLAttributes, HTMLTag } from "astro/types";
 
-import generateShortId from "../../utilities/generateShortId";
+import generateShortId from "../../utilities/generateShortId/index.ts";
 
 export type Props = HTMLAttributes<"span"> & {
-	as?: HTMLTag | undefined;
-	tip: string;
+  as?: HTMLTag | undefined;
+  tip: string;
 };
 
 const { as = "span", id = generateShortId(), tip, ...props } = Astro.props;
@@ -15,16 +15,16 @@ const { as = "span", id = generateShortId(), tip, ...props } = Astro.props;
 const Component = as;
 
 const attrs = Object.assign(
-	{
-		class: "tooltip",
-	},
-	props,
+  {
+    class: "tooltip",
+  },
+  props
 );
 
 const content = (await Astro.slots.render("tip")) || tip;
 ---
 
-<Component aria-labelledby={id} {...attrs}>
-	<slot />
+<Component aria-labelledby={id} role="tooltip" {...attrs}>
+  <slot />
 </Component>
 <span id={id} role="tooltip">{content}</span>

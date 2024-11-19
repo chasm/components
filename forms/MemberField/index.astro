@@ -1,0 +1,77 @@
+---
+import { MEMBER_FIELD_PIVOT } from "../../constants.ts";
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import FieldWrapper from "../FieldWrapper/index.astro";
+import RadioGroup from "../elements/RadioGroup/index.astro";
+import Select from "../elements/Select/index.astro";
+import getOptionsCount from "./getOptionsCount";
+
+const {
+  field = "member-field",
+  form,
+  group = {},
+  help = {},
+  id = generateShortId(),
+  includeNull,
+  label: lbl,
+  legend = {},
+  message: msg,
+  name,
+  options = [],
+  outer = {},
+  required,
+  selected,
+  tag = {},
+  wrapper = {},
+} = Astro.props;
+
+const count = getOptionsCount(options);
+const label = (await Astro.slots.render("default")) || lbl;
+const LIMIT = import.meta.env.MEMBER_FIELD_PIVOT || MEMBER_FIELD_PIVOT;
+const message = (await Astro.slots.render("message")) || msg;
+---
+
+{
+  count > LIMIT ? (
+    <FieldWrapper
+      {field}
+      {help}
+      {id}
+      {label}
+      {legend}
+      {message}
+      {outer}
+      {required}
+      {tag}
+    >
+      {(labelledBy: string) => (
+        <Select
+          {form}
+          {id}
+          {includeNull}
+          {labelledBy}
+          {name}
+          {options}
+          {selected}
+        />
+      )}
+    </FieldWrapper>
+  ) : (
+    <RadioGroup
+      {form}
+      {group}
+      {help}
+      {id}
+      {includeNull}
+      {legend}
+      {name}
+      {options}
+      {required}
+      {selected}
+      {wrapper}
+    >
+      <Fragment set:html={label} />
+      <Fragment set:html={message} slot="message" />
+    </RadioGroup>
+  )
+}

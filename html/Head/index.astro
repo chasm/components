@@ -1,10 +1,11 @@
 ---
-import type { HTMLAttributes } from "astro/types";
 import type { PageMetadata } from "../../types.ts";
 
+import type { HTMLAttributes } from "astro/types";
+
 export type Props = HTMLAttributes<"head"> & {
-	metadata: PageMetadata;
-	site: string;
+  metadata: PageMetadata;
+  site: string;
 };
 
 const { metadata, site, ...props } = Astro.props;
@@ -15,9 +16,9 @@ const ttl = title ? `${title} : ${site}` : site;
 ---
 
 <head {...props}>
-	<meta charset="utf-8" />
-	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-	<meta name="viewport" content="width=device-width" />
-	<title>{ttl}</title>
-	<slot />
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width" />
+  <title>{ttl}</title>
+  <slot />
 </head>

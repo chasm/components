@@ -1,0 +1,144 @@
+---
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+import FieldsetWrapper from "../FieldsetWrapper/index.astro";
+import DateInput from "../elements/DateInput/index.astro";
+import TextInput from "../elements/TextInput/index.astro";
+import TimeInput from "../elements/TimeInput/index.astro";
+import TimeZoneSelect from "../elements/TimeZoneSelect/index.astro";
+
+const {
+  countries,
+  date = "",
+  dateAttrs = {},
+  disabled,
+  field = "instant-field",
+  form,
+  fractionalSeconds = "",
+  fractionalSecondsAttrs = {},
+  group,
+  help,
+  id = generateShortId(),
+  inputmode = "numeric",
+  label = "Timestamp",
+  legend,
+  maxDate,
+  maxTime,
+  message,
+  minDate,
+  minTime,
+  name,
+  outer,
+  required,
+  stepDate,
+  stepTime,
+  tag,
+  time = "",
+  timeAttrs = {},
+  timeZone = "",
+  timeZoneAttrs = {},
+  useList,
+} = Astro.props;
+
+const dateAttributes = mapAttributes(dateAttrs, ["instant-field-date"]);
+const fractionalSecondsAttributes = mapAttributes(fractionalSecondsAttrs, [
+  "instant-field-fractional-seconds",
+]);
+const timeAttributes = mapAttributes(timeAttrs, ["instant-field-time"]);
+const timeZoneAttributes = mapAttributes(timeZoneAttrs, [
+  "instant-field-time-zone",
+]);
+---
+
+<FieldsetWrapper
+  {disabled}
+  {field}
+  {form}
+  {group}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  name={`${name}:wrapper`}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => {
+      return (
+        <>
+          <label for={`${id}_date`}>
+            <span id={`${id}_date:label`}>Date</span>
+            <DateInput
+              {...dateAttributes}
+              {disabled}
+              {form}
+              id={`${id}_date`}
+              {inputmode}
+              labelledBy={`${labelledBy} ${id}_date:label`}
+              {...(maxDate ? { max: maxDate } : {})}
+              {...(minDate ? { min: minDate } : {})}
+              name={`${name}:date`}
+              {required}
+              {...(stepDate ? { step: stepDate } : {})}
+              value={date}
+            />
+          </label>
+          <label for={`${id}_time`}>
+            <span id={`${id}_time:label`}>Time</span>
+            <TimeInput
+              {...timeAttributes}
+              {disabled}
+              {form}
+              id={`${id}_time`}
+              {inputmode}
+              labelledBy={`${labelledBy} ${id}_time:label`}
+              {...(maxTime ? { max: maxTime } : {})}
+              {...(minTime ? { min: minTime } : {})}
+              name={`${name}:time`}
+              {required}
+              {...(stepTime ? { step: stepTime } : {})}
+              value={time}
+            />
+          </label>
+          <label for={`${id}_fractional-seconds`}>
+            <span id={`${id}_fractional-seconds:label`}>
+              Fractional seconds
+            </span>
+            <TextInput
+              {...fractionalSecondsAttributes}
+              {disabled}
+              {form}
+              id={`${id}_fractionalSeconds`}
+              {inputmode}
+              inputmode="numeric"
+              labelledBy={`${labelledBy} ${id}_fractional-seconds:label`}
+              name={`${name}:fractionalSeconds`}
+              pattern="[0-9]{0,9}"
+              value={fractionalSeconds}
+            />
+          </label>
+          <label for={`${id}_time-zone`}>
+            <span id={`${id}_time-zone:label`}>Time zone</span>
+            <TimeZoneSelect
+              {...timeZoneAttributes}
+              {countries}
+              {disabled}
+              {form}
+              id={`${id}_timeZone`}
+              {inputmode}
+              includeNull
+              labelledBy={`${labelledBy} ${id}_time-zone:label`}
+              name={`${name}:timeZone`}
+              {required}
+              selected={timeZone}
+              {useList}
+            />
+          </label>
+        </>
+      );
+    }
+  }
+</FieldsetWrapper>

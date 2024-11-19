@@ -4,12 +4,12 @@ import "./index.css";
 import type { HTMLAttributes } from "astro/types";
 
 export type Props = HTMLAttributes<"aside"> & {
-	label?: string | undefined;
+  label?: string | undefined;
 };
 
 const { label = "Navigation", ...props } = Astro.props;
 ---
 
 <aside aria-label={label} {...props}>
-	<slot />
+  <slot />
 </aside>

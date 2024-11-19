@@ -1,0 +1,21 @@
+---
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  autocomplete,
+  field = "month-input",
+  form,
+  id = generateShortId(),
+  name,
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+
+const inputAttrs = mapAttributes(attrs, ["month-input"]);
+const wrapperAttrs = mapAttributes(wrapper, ["month-input-wrapper"]);
+---
+
+<span {...wrapperAttrs}>
+  <input {...inputAttrs} {autocomplete} {form} {id} {name} type="month" />
+</span>

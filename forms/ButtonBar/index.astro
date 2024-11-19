@@ -1,0 +1,31 @@
+---
+import "./index.css";
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+
+const {
+  disabled,
+  group = {},
+  hideClass = "sr-only",
+  id = generateShortId(),
+  label,
+  legend = {},
+  outer = {},
+} = Astro.props;
+
+const groupAttrs = mapAttributes(group, ["group"]);
+const legendAttrs = mapAttributes(legend, ["label", hideClass as string]);
+const outerAttrs = mapAttributes(outer, ["button-bar"]);
+
+const lbl = (await Astro.slots.render("label")) || label || "Button bar";
+const labelledBy = `${id}_legend`;
+
+const element = await Astro.slots.render("default", [labelledBy]);
+---
+
+<fieldset {...outerAttrs} {disabled}>
+  {lbl ? <legend {...legendAttrs} id={labelledBy} set:html={lbl} /> : null}
+  <div {...groupAttrs} aria-live="polite">
+    <Fragment set:html={element} />
+  </div>
+</fieldset>

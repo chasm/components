@@ -1,0 +1,41 @@
+---
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+import "./script.astro";
+
+const {
+  allowUnmasked,
+  autocomplete,
+  field = "password-input",
+  form,
+  id = generateShortId(),
+  labelledBy,
+  name,
+  required,
+  type: _type,
+  value,
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+
+const pwAttrs = mapAttributes(
+  attrs,
+  allowUnmasked ? ["password-input", "unmaskable"] : ["password-input"]
+);
+const wrapperAttrs = mapAttributes(wrapper, ["input-wrapper"]);
+---
+
+<span {...wrapperAttrs}>
+  <input
+    {...pwAttrs}
+    aria-labelledby={labelledBy}
+    {autocomplete}
+    {form}
+    {id}
+    {name}
+    {required}
+    spellcheck="false"
+    type="password"
+    {value}
+  />
+</span>

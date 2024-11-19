@@ -1,0 +1,88 @@
+---
+import type { Options } from "../../types.ts";
+
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+import FieldsetWrapper from "../../FieldsetWrapper/index.astro";
+import RadioInput from "./RadioInput/index.astro";
+
+const {
+  disabled,
+  field = "radio-group",
+  form,
+  group,
+  help,
+  id = generateShortId(),
+  includeNull,
+  label,
+  legend,
+  message,
+  name,
+  options,
+  outer,
+  required,
+  selected,
+  tag,
+  wrapper,
+  ...attrs
+} = Astro.props;
+
+const inputAttrs = mapAttributes(attrs, ["radio-input"]);
+---
+
+<FieldsetWrapper
+  {disabled}
+  {field}
+  {form}
+  {group}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  name={`${name}:wrapper`}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => {
+      return (
+        <>
+          {(options as Options).map(({ label, value, ...attrs }) => {
+            const inputAttrs = mapAttributes(attrs, ["radio-input"]);
+
+            return (
+              <RadioInput
+                {...inputAttrs}
+                checked={Boolean(selected) && selected === value}
+                {form}
+                groupLabelId={labelledBy}
+                {name}
+                {required}
+                {value}
+                wrapper={{ dataset: { "radio-group": "radio-input" } }}
+              >
+                {label}
+              </RadioInput>
+            );
+          })}
+          {includeNull ? (
+            <RadioInput
+              {...inputAttrs}
+              checked={Boolean(selected) && selected === ""}
+              {form}
+              groupLabelId={labelledBy}
+              {name}
+              {required}
+              value=""
+              wrapper={{ dataset: { "radio-group": "radio-input" } }}
+            >
+              N/A
+            </RadioInput>
+          ) : null}
+        </>
+      );
+    }
+  }
+</FieldsetWrapper>

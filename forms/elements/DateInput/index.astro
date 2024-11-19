@@ -1,0 +1,36 @@
+---
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+const {
+  autocomplete,
+  field = "date-input",
+  form,
+  id = generateShortId(),
+  inputmode = "numeric",
+  labelledBy,
+  name,
+  required,
+  value,
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+
+const inputAttrs = mapAttributes(attrs, ["date-input"]);
+const wrapperAttrs = mapAttributes(wrapper, ["date-input-wrapper"]);
+---
+
+<span {...wrapperAttrs}>
+  <input
+    {...inputAttrs}
+    aria-labelledby={labelledBy}
+    {autocomplete}
+    {form}
+    {id}
+    {inputmode}
+    {name}
+    {required}
+    type="date"
+    {value}
+  />
+</span>

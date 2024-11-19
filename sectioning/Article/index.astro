@@ -3,22 +3,22 @@ import "./index.css";
 
 import type { HTMLAttributes } from "astro/types";
 
-import generateShortId from "../../utilities/generateShortId";
+import generateShortId from "../../utilities/generateShortId/index.ts";
 
 export type Props = HTMLAttributes<"article">;
 
 const props = Astro.props;
 
 const attrs = Object.assign(
-	{
-		class: "article",
-		id: generateShortId(),
-	},
-	props,
+  {
+    class: "article",
+    id: generateShortId(),
+  },
+  props
 );
 ---
 
 <article {...attrs}>
-	<slot name="title" />
-	<slot />
+  <slot name="title" />
+  <slot />
 </article>

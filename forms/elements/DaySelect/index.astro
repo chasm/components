@@ -1,0 +1,45 @@
+---
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+import Select from "../Select/index.astro";
+
+const {
+  autocomplete,
+  days,
+  field = "day-select",
+  form,
+  id = generateShortId(),
+  includeNull,
+  labelledBy,
+  name = "day",
+  required,
+  selected,
+  wrapper,
+  ...attrs
+} = Astro.props;
+
+const selectAttrs = mapAttributes(attrs, ["select"]);
+
+const options = new Array(31)
+  .fill(0)
+  .map((_, i) => ({
+    label: String(i + 1),
+    value: String(i + 1).padStart(2, "0"),
+  }))
+  .filter(({ label }) => !days || days.includes(Number(label)));
+---
+
+<Select
+  {...selectAttrs}
+  {autocomplete}
+  {field}
+  {form}
+  {id}
+  {includeNull}
+  {labelledBy}
+  {name}
+  {options}
+  {required}
+  {selected}
+  {wrapper}
+/>

@@ -1,0 +1,26 @@
+---
+import generateShortId from "../../../utilities/generateShortId/index.ts";
+import mapDataset from "../../../utilities/mapDataset/index.ts";
+
+const {
+  "class:list": _elementClassList,
+  dataset = {},
+  field = "hidden-input",
+  form,
+  id = generateShortId(),
+  name,
+  type: _type,
+  value,
+  ...attrs
+} = Astro.props;
+---
+
+<input
+  {...attrs}
+  {...mapDataset(dataset)}
+  {form}
+  {id}
+  {name}
+  type="hidden"
+  {value}
+/>

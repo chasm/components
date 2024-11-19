@@ -1,0 +1,46 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+export type Props = HTMLAttributes<"progress">;
+
+const props = Astro.props;
+
+const attrs = Object.assign(
+  {
+    class: "scroll-indicator",
+  },
+  props
+);
+---
+
+<progress aria-hidden="true" max="100" value="0" {...attrs}>
+  <span>
+    <span></span>
+  </span>
+</progress>
+
+<script is:inline>
+  function setScrollHandler() {
+    const p = document.querySelector(".scroll-indicator");
+    const s = document.querySelector(".scroll-indicator > span > span");
+    const d = document.documentElement;
+
+    function setPosition() {
+      const v = Math.round(
+        (d.scrollTop / (d.scrollHeight - d.clientHeight)) * 100
+      );
+
+      p && p.setAttribute("value", `${v}`);
+      s && (s.style.width = `${v}%`);
+    }
+
+    globalThis.addEventListener("resize", setPosition);
+    document.addEventListener("scroll", setPosition);
+
+    setPosition();
+  }
+
+  globalThis.addEventListener("DOMContentLoaded", setScrollHandler);
+</script>

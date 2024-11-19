@@ -4,14 +4,14 @@ import "./index.css";
 import type { HTMLAttributes } from "astro/types";
 
 export type Props = HTMLAttributes<"span"> & {
-	timeToRead?: number | undefined;
+  timeToRead?: number | undefined;
 };
 
 const { timeToRead = 0 } = Astro.props;
 ---
 
 {
-	timeToRead ? (
-		<span class="time-to-read">{timeToRead} minute read</span>
-	) : undefined
+  timeToRead ? (
+    <span class="time-to-read">{timeToRead} minute read</span>
+  ) : undefined
 }

@@ -1,0 +1,55 @@
+---
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import FieldWrapper from "../FieldWrapper/index.astro";
+import NumberInput from "../elements/NumberInput/index.astro";
+
+const {
+  field = "number-field",
+  form,
+  help = {},
+  id = generateShortId(),
+  inputmode = "numeric",
+  label = "Number",
+  legend = {},
+  list,
+  message,
+  name,
+  outer = {},
+  placehoder: _placeholder,
+  required,
+  tag = {},
+  wrapper = {},
+  ...attrs
+} = Astro.props;
+---
+
+<FieldWrapper
+  {field}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => {
+      return (
+        <NumberInput
+          {...attrs}
+          {list}
+          {field}
+          {form}
+          {id}
+          {inputmode}
+          {labelledBy}
+          {name}
+          {required}
+          {wrapper}
+        />
+      );
+    }
+  }
+</FieldWrapper>

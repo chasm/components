@@ -1,0 +1,11 @@
+.sb-button-bar {
+	align-items: center;
+	border-radius: 5px;
+	border: 1px solid
+		var(--sb-button-bar-border-color, var(--sb-color-gray-1, #dfdfe2));
+	display: flex;
+	gap: 1rem;
+	justify-content: flex-end;
+	padding: 1rem;
+	width: 100%;
+}

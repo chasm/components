@@ -8,7 +8,7 @@ import Error from "../../widgets/Error/index.astro";
 import Footer from "./Footer/index.astro";
 import HGroup from "./HGroup/index.astro";
 
-import generateShortId from "../../utilities/generateShortId";
+import generateShortId from "../../utilities/generateShortId/index.ts";
 
 export type Props = HTMLAttributes<"li"> & {
   as?: HTMLTag | undefined;

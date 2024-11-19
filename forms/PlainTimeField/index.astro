@@ -1,0 +1,56 @@
+---
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+import FieldWrapper from "../FieldWrapper/index.astro";
+import TimeInput from "../elements/TimeInput/index.astro";
+
+const {
+  field = "plain-time-field",
+  form,
+  help,
+  id = generateShortId(),
+  inputmode = "numeric",
+  label = "Time",
+  legend,
+  list,
+  message,
+  name,
+  outer,
+  required,
+  tag,
+  type: _type,
+  value,
+  wrapper,
+  ...attrs
+} = Astro.props;
+
+const timeAttrs = mapAttributes(attrs, []);
+---
+
+<FieldWrapper
+  {field}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => (
+      <TimeInput
+        {...timeAttrs}
+        {form}
+        {id}
+        {inputmode}
+        {labelledBy}
+        {name}
+        {required}
+        {value}
+        {wrapper}
+      />
+    )
+  }
+</FieldWrapper>

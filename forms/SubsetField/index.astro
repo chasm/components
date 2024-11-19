@@ -1,0 +1,17 @@
+---
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+import CheckboxGroup from "../elements/CheckboxGroup/index.astro";
+
+const { label: lbl, message, wrapper: wrapperAttrs, ...attrs } = Astro.props;
+
+const cbAttrs = mapAttributes(attrs, []);
+const wrapper = mapAttributes(wrapperAttrs, ["subset-field"]);
+
+const label = Astro.slots.render("default") || lbl;
+const msg = Astro.slots.render("message") || message;
+---
+
+<CheckboxGroup {...cbAttrs} {wrapper}>
+  <Fragment set:html={label} />
+  <Fragment slot="message" set:html={msg} />
+</CheckboxGroup>

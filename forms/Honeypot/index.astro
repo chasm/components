@@ -1,0 +1,44 @@
+---
+import "./index.css";
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+import PasswordField from "../PasswordField/index.astro";
+
+const {
+  cLabel = "Put nothing in this field as well:",
+  confirmation,
+  field = "funnypot",
+  form,
+  password,
+  pwLabel = "Leave this field as is:",
+  ...attrs
+} = Astro.props;
+
+const wrapperAttrs = mapAttributes(attrs, ["funnypot"]);
+
+const pwValue = password || import.meta.env.HONEYPOT_PASSWORD;
+const confValue = confirmation || import.meta.env.HONEYPOT_CONFIRMATION;
+---
+
+<fieldset aria-hidden="true" {...wrapperAttrs}>
+  <legend>Please ignore these two fields</legend>
+  <PasswordField
+    allowAutocomplete={false}
+    data-novalidate
+    {field}
+    {form}
+    label={pwLabel}
+    name="password"
+    tabindex="-1"
+    value={pwValue}
+  />
+  <PasswordField
+    allowAutocomplete={false}
+    data-novalidate
+    {field}
+    {form}
+    label={cLabel}
+    name="confirmation"
+    tabindex="-1"
+    value={confValue}
+  />
+</fieldset>

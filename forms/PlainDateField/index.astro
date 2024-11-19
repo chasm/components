@@ -1,0 +1,56 @@
+---
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+import FieldWrapper from "../FieldWrapper/index.astro";
+import DateInput from "../elements/DateInput/index.astro";
+
+const {
+  field = "plain-date-field",
+  form,
+  help,
+  id = generateShortId(),
+  inputmode = "numeric",
+  label = "Date",
+  legend,
+  list,
+  message,
+  name,
+  outer,
+  required,
+  tag,
+  type: _type,
+  value,
+  wrapper,
+  ...attrs
+} = Astro.props;
+
+const dateAttrs = mapAttributes(attrs, []);
+---
+
+<FieldWrapper
+  {field}
+  {help}
+  {id}
+  {label}
+  {legend}
+  {message}
+  {outer}
+  {required}
+  {tag}
+>
+  {
+    (labelledBy: string) => (
+      <DateInput
+        {...dateAttrs}
+        {form}
+        {id}
+        {inputmode}
+        {labelledBy}
+        {name}
+        {required}
+        {value}
+        {wrapper}
+      />
+    )
+  }
+</FieldWrapper>
