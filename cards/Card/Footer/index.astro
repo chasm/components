@@ -18,7 +18,7 @@ const { href, label, useMoreLink } = Astro.props
 	<slot />
 	{href ? (
 		useMoreLink ? (
-			<a aria-label={`Read more: ${label}`} class="button-right" {href}>Read more <slot name="arrow" /></a>
+			<a aria-label={`Read more of ${label}`} class="button-right" {href}>Read more <slot name="arrow" /></a>
 		) : (
 		<a class="button-right" {href}>{label} <slot name="arrow" /></a>
 		)
