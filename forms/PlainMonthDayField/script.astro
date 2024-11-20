@@ -3,50 +3,50 @@
 ---
 
 <script>
-	;(function () {
-		globalThis.addEventListener("DOMContentLoaded", function () {
-			const monthDayFields = document.querySelectorAll(
-				"fieldset.sb-plain-month-day-field",
-			)
+  (function () {
+    globalThis.addEventListener("DOMContentLoaded", function () {
+      const monthDayFields = document.querySelectorAll(
+        "fieldset.plain-month-day-field"
+      );
 
-			const daysInMonth = [
-				undefined,
-				31,
-				29,
-				31,
-				30,
-				31,
-				30,
-				31,
-				31,
-				30,
-				31,
-				30,
-				31,
-			]
+      const daysInMonth = [
+        undefined,
+        31,
+        29,
+        31,
+        30,
+        31,
+        30,
+        31,
+        31,
+        30,
+        31,
+        30,
+        31,
+      ];
 
-			;[...monthDayFields].forEach((element) => {
-				const monthSelect = element.querySelector("select.sb-select-month")
-				const daySelect = element.querySelector("select.sb-select-day")
+      [...monthDayFields].forEach(element => {
+        const monthSelect = element.querySelector("select.select-month");
+        const daySelect = element.querySelector("select.select-day");
 
-				monthSelect?.addEventListener("change", function () {
-					const month = parseInt((monthSelect as HTMLSelectElement).value, 10)
-					const count = daysInMonth[month] || 31
-					const options = new Array(count).fill(0).map((_, i) => {
-						const label = i + 1
-						const value = String(i + 1).padStart(2, "0")
-						const normalized =
-							parseInt(String((daySelect as HTMLSelectElement)?.value)) > count
-								? String(count).padStart(2, "0")
-								: (daySelect as HTMLSelectElement)?.value
-						const selected = normalized === value ? "selected" : ""
+        monthSelect?.addEventListener("change", function () {
+          const month = parseInt((monthSelect as HTMLSelectElement).value, 10);
+          const count = daysInMonth[month] || 31;
+          const options = new Array(count).fill(0).map((_, i) => {
+            const label = i + 1;
+            const value = String(i + 1).padStart(2, "0");
+            const normalized =
+              parseInt(String((daySelect as HTMLSelectElement)?.value)) > count
+                ? String(count).padStart(2, "0")
+                : (daySelect as HTMLSelectElement)?.value;
+            const selected = normalized === value ? "selected" : "";
 
-						return `<option value="${value}"${selected}>${label}</option>`
-					})
+            return `<option value="${value}"${selected}>${label}</option>`;
+          });
 
-					daySelect && (daySelect.innerHTML = options.join("\n"))
-				})
-			})
-		})
-	})()
+          daySelect && (daySelect.innerHTML = options.join("\n"));
+        });
+      });
+    });
+  })();
 </script>

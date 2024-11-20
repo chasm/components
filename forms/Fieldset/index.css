@@ -1,32 +1,32 @@
-.sb-fieldset {
+.fieldset {
 	border-radius: 5px;
-	border: 1px solid var(--sb-fieldset-border, var(--sb-color-gray-1, #dfdfe2));
+	border: 1px solid var(--fieldset-border, var(--color-gray-1, #dfdfe2));
 	padding: 1rem;
 	width: 100%;
 }
 
-.sb-fieldset-legend {
+.fieldset-legend {
 	border-radius: 5px;
 	border: 1px solid
-		var(--sb-fieldset-legend-border, var(--sb-color-gray-1, #dfdfe2));
-	font-size: var(--sb-step-1, 1.25rem);
+		var(--fieldset-legend-border, var(--color-gray-1, #dfdfe2));
+	font-size: var(--step-1, 1.25rem);
 	font-weight: 500;
 	margin-left: 0.5rem;
 	padding: 0.5rem;
 }
 
-.sb-fieldset:focus-within {
-	border-color: var(--sb-fieldset-focus, var(--sb-color-green-shaded, #0e4e09));
+.fieldset:focus-within {
+	border-color: var(--fieldset-focus, var(--color-green-shaded, #0e4e09));
 }
 
-.sb-fieldset:focus-within legend {
+.fieldset:focus-within legend {
 	border-color: var(
-		--sb-fieldset-legend-border-color-focus,
-		var(--sb-color-green-shaded, #0e4e09)
+		--fieldset-legend-border-color-focus,
+		var(--color-green-shaded, #0e4e09)
 	);
 	color: var(
-		--sb-fieldset-legend-color-focus,
-		var(--sb-color-green-shaded, #0e4e09)
+		--fieldset-legend-color-focus,
+		var(--color-green-shaded, #0e4e09)
 	);
 	font-variant-caps: all-small-caps;
 }

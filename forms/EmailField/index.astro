@@ -1,46 +1,28 @@
 ---
-import generateShortId from "../../utilities/generateShortId/index.ts";
-import FieldWrapper from "../FieldWrapper/index.astro";
+import type { HTMLAttributes } from "astro/types";
+
+import Field, { type Props as FieldProps } from "../Field/index.astro";
 import EmailInput from "../elements/EmailInput/index.astro";
 
+import generateShortId from "../../utilities/generateShortId/index.ts";
+
+export type Props = HTMLAttributes<"input"> & FieldProps;
+
 const {
-  field = "email-field",
   help,
+  helpProps,
   id = generateShortId(),
-  inputmode = "email",
-  label = "Email address",
-  legend,
-  message,
-  outer,
-  required,
-  tag,
-  ...attrs
+  label,
+  labelProps,
+  wrapperProps,
+  ...props
 } = Astro.props;
 ---
 
-<FieldWrapper
-  {field}
-  {help}
-  {id}
-  {label}
-  {legend}
-  {message}
-  {outer}
-  {required}
-  {tag}
->
+<Field {...props} {help} {helpProps} {label} {labelProps} {wrapperProps}>
   {
     (labelledBy: string) => {
-      return (
-        <EmailInput
-          {...attrs}
-          {field}
-          {id}
-          {inputmode}
-          {labelledBy}
-          {required}
-        />
-      );
+      return <EmailInput {id} {labelledBy} {...props} />;
     }
   }
-</FieldWrapper>
+</Field>

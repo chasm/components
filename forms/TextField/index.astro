@@ -1,0 +1,52 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import type { Options } from "../types";
+
+import Field, { type Props as FieldProps } from "../Field/index.astro";
+import TextInput, {
+  type Props as TextInputProps,
+} from "../elements/TextInput/index.astro";
+import Textarea from "../elements/Textarea/index.astro";
+
+import generateShortId from "../../utilities/generateShortId/index.ts";
+
+export type Props = HTMLAttributes<"input"> &
+  HTMLAttributes<"textarea"> &
+  FieldProps & {
+    datalist?: Options | undefined;
+  };
+
+const {
+  cols,
+  datalist = {},
+  help,
+  helpProps,
+  id = generateShortId(),
+  label,
+  labelProps,
+  rows,
+  wrapperProps,
+  ...props
+} = Astro.props;
+
+const content = await Astro.slots.render("default");
+---
+
+<Field {...props} {help} {helpProps} {label} {labelProps} {wrapperProps}>
+  {
+    (labelledBy: string) => {
+      return parseInt(rows as string) > 0 ? (
+        <Textarea {cols} {id} {labelledBy} {rows} {...props}>
+          <Fragment set:html={content} />
+        </Textarea>
+      ) : (
+        <TextInput
+          {datalist}
+          {id}
+          {labelledBy}
+          {...(props as TextInputProps)}
+        />
+      );
+    }
+  }
+</Field>

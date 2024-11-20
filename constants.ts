@@ -1,4 +1,6 @@
-type ImageMediaType =
+import process from "node:process";
+
+export type ImageMediaType =
 	| "image/jpeg"
 	| "image/png"
 	| "image/webp"

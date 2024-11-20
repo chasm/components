@@ -1,48 +1,46 @@
-.sb-button {
+.button {
 	background-color: var(
-		--sb-button-background-color,
-		var(--sb-color-gray-1, #dfdfe2)
+		--button-background-color,
+		var(--color-gray-1, #dfdfe2)
 	);
 	border: 2px solid
-		var(--sb-button-border-color, var(--sb-color-gray-7, #44444b));
+		var(--button-border-color, var(--color-gray-7, #44444b));
 	border-radius: 4px;
-	color: var(--sb-button-color, var(--sb-color-gray-7, #44444b));
+	color: var(--button-color, var(--color-gray-7, #44444b));
 	padding: 0.25rem 0.75rem;
-	text-transform: lowercase;
-	font-variant-caps: small-caps;
 	letter-spacing: 0.1ch;
 	font-size: 1.25rem;
 }
 
-.sb-button-reset {
+.button-reset {
 	background-color: var(
-		--sb-button-reset-background-color,
-		var(--sb-color-highlight, #aaf5a3)
+		--button-reset-background-color,
+		var(--color-highlight, #aaf5a3)
 	);
-	color: var(--sb-button-reset-color, var(--sb-color-gray-8, #2c2c30));
+	color: var(--button-reset-color, var(--color-gray-8, #2c2c30));
 }
 
-.sb-button-submit {
+.button-submit {
 	background-color: var(
-		--sb-button-submit-background-color,
-		var(--sb-color-green-shaded, #0e4e09)
+		--button-submit-background-color,
+		var(--color-green-shaded, #0e4e09)
 	);
 	border-color: var(
-		--sb-button-submit-border-color,
-		var(--sb-color-green-shaded, #0e4e09)
+		--button-submit-border-color,
+		var(--color-green-shaded, #0e4e09)
 	);
-	color: var(--sb-button-submit-color, var(--sb-color-gray-0, #fafafa));
+	color: var(--button-submit-color, var(--color-gray-0, #fafafa));
 }
 
-.sb-button:focus,
-.sb-button:hover {
+.button:focus,
+.button:hover {
 	border-color: var(
-		--sb-button-border-color-hover,
-		var(--sb-color-green-shaded, #0e4e09)
+		--button-border-color-hover,
+		var(--color-green-shaded, #0e4e09)
 	);
 	background-color: var(
-		--sb-button-background-color-hover,
-		var(--sb-color-gray-0, #fafafa)
+		--button-background-color-hover,
+		var(--color-gray-0, #fafafa)
 	);
-	color: var(--sb-button-color-hover, var(--sb-color-green-shaded, #0e4e09));
+	color: var(--button-color-hover, var(--color-green-shaded, #0e4e09));
 }

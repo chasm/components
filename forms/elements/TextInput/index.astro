@@ -1,54 +1,49 @@
 ---
+import type { HTMLAttributes } from "astro/types";
+
+import type { Options } from "../../types";
+
 import createListOptions from "../../../utilities/createListOptions/index.ts";
 import generateShortId from "../../../utilities/generateShortId/index.ts";
 import mapAttributes from "../../../utilities/mapAttributes/index.ts";
 
+export type Props = HTMLAttributes<"input"> & {
+  datalist?: HTMLAttributes<"datalist"> | undefined;
+  labelledBy?: string | undefined;
+  list?: Options | undefined;
+};
+
 const {
-  autocomplete,
   autocorrect: _autocorrect,
   datalist = {},
-  field = "text-input",
-  form,
   id = generateShortId(),
   inputmode = "text",
   labelledBy,
   list,
-  name,
   placeholder: _placeholder,
-  required,
   type: _type,
-  value,
-  wrapper = {},
-  ...attrs
+  ...props
 } = Astro.props;
 
+const attrs = mapAttributes(props, [`text-input`]);
 const datalistAttrs = mapAttributes(datalist, ["datalist"]);
-const elementAttrs = mapAttributes(attrs, [`${field}-input`]);
-const wrapperAttrs = mapAttributes(wrapper, ["string-input-wrapper"]);
 
 const listId = `${id}_list`;
 const lst = list ? { list: listId } : {};
 ---
 
-<span {...wrapperAttrs}>
-  <input
-    {...elementAttrs}
-    aria-labelledby={labelledBy}
-    {autocomplete}
-    {form}
-    {id}
-    {inputmode}
-    {...lst}
-    {name}
-    {required}
-    type="text"
-    {value}
-  />
-  {
-    list ? (
-      <datalist {...datalistAttrs} id={listId}>
-        <Fragment set:html={createListOptions(list)} />
-      </datalist>
-    ) : null
-  }
-</span>
+<input
+  aria-labelledby={labelledBy}
+  {...attrs}
+  {id}
+  {inputmode}
+  {...lst}
+  type="text"
+/>
+{
+  list ? (
+    <datalist {...datalistAttrs} id={listId}>
+      <Fragment set:html={createListOptions(list)} />
+    </datalist>
+  ) : null
+}

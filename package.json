@@ -1,6 +1,6 @@
 {
   "name": "@munat/components",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Astro components with Deno",
   "keywords": [
     "astro-component",
@@ -76,6 +76,7 @@
     "./forms/ButtonBar": "./forms/ButtonBar/index.astro",
     "./forms/DurationField": "./forms/DurationField/index.astro",
     "./forms/EmailField": "./forms/EmailField/index.astro",
+    "./forms/Field": "./forms/Field/index.astro",
     "./forms/Fieldset": "./forms/Fieldset/index.astro",
     "./forms/FieldsetWrapper": "./forms/FieldsetWrapper/index.astro",
     "./forms/FieldWrapper": "./forms/FieldWrapper/index.astro",
@@ -90,7 +91,7 @@
     "./forms/PlainMonthDayField": "./forms/PlainMonthDayField/index.astro",
     "./forms/PlainTimeField": "./forms/PlainTimeField/index.astro",
     "./forms/PlainYearMonthField": "./forms/PlainYearMonthField/index.astro",
-    "./forms/StringField": "./forms/StringField/index.astro",
+    "./forms/TextField": "./forms/TextField/index.astro",
     "./forms/SubsetField": "./forms/SubsetField/index.astro",
     "./forms/TelField": "./forms/TelField/index.astro",
     "./forms/TimeZoneField": "./forms/TimeZoneField/index.astro",

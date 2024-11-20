@@ -1,0 +1,9 @@
+.field-help {
+	font-size: var(--step-0);
+	font-weight: 400;
+}
+
+.field-wrapper:has(:required) .field-label::after {
+	color: var(--required-field-marker-color, var(--color-magenta-4));
+	content: var(--required-field-marker, "*");
+}

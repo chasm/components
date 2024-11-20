@@ -1,12 +1,13 @@
 ---
 import "./index.css";
+
 import mapAttributes from "../../utilities/mapAttributes/index.ts";
 
-const { label: lbl, type = "button", ...attrs } = Astro.props;
+const { label: lbl, type = "button", ...props } = Astro.props;
 
-const buttonAttrs = mapAttributes(attrs, ["button", `button-${type}`]);
+const attrs = mapAttributes(props, ["button", `button-${type}`]);
 
 const label = (await Astro.slots.render("default")) || lbl;
 ---
 
-<button {...buttonAttrs} {type}>{label}</button>
+<button {...attrs} {type}>{label}</button>

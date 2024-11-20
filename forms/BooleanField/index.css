@@ -11,7 +11,7 @@
 	border: 2px solid
 		var(
 			--checkbox-border-color,
-			var(--sb-color-gray-3, #a9a9b1)
+			var(--color-gray-3, #a9a9b1)
 		);
 	display: grid;
 	font-family: inherit;
@@ -29,12 +29,12 @@
 .checkbox input[type="checkbox"]::before {
 	background-color: var(
 		--checkbox-background-color-before,
-		var(--sb-color-gray-7, #44444b)
+		var(--color-gray-7, #44444b)
 	);
 	box-shadow: inset 1rem 1rem
 		var(
 			--checkbox-check-color,
-			var(--sb-color-green-shaded, #0e4e09)
+			var(--color-green-shaded, #0e4e09)
 		);
 	clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 	content: "";
@@ -50,7 +50,7 @@
 	outline: 3px solid
 		var(
 			--checkbox-outline-color-focus,
-			var(--sb-color-green-shaded, #0e4e09)
+			var(--color-green-shaded, #0e4e09)
 		);
 	outline-offset: 0.15rem;
 }
@@ -58,14 +58,14 @@
 .checkbox input[type="checkbox"]:checked {
 	background-color: var(
 		--checkbox-background-color-checked,
-		var(--sb-color-gray-0, #fafafa)
+		var(--color-gray-0, #fafafa)
 	);
 }
 
 .checkbox input[type="checkbox"]:checked::before {
 	background-color: var(
 		--checkbox-background-color-checked-before,
-		var(--sb-color-gray-7, #44444b)
+		var(--color-gray-7, #44444b)
 	);
 	transform: scale(1);
 }

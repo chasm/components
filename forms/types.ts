@@ -2,6 +2,8 @@ import type { HTMLAttributes } from "astro/types"
 
 export type Dataset = Record<string, string | number | boolean>
 
+export type FormValidation = "default" | "fallback" | "operations"
+
 export type Help = HTMLAttributes<"div"> &
 	{
 		dataset?: Dataset

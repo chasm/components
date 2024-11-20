@@ -1,35 +1,36 @@
 ---
+import type { HTMLAttributes } from "astro/types";
+
 import generateShortId from "../../../utilities/generateShortId/index.ts";
 import mapAttributes from "../../../utilities/mapAttributes/index.ts";
+
+export type Props = HTMLAttributes<"textarea"> & {
+  labelledBy?: string | undefined;
+};
 
 const {
   autocomplete,
   autocorrect: _autocorrect,
-  field = "textarea",
   form,
   id = generateShortId(),
   labelledBy,
   name,
   placeholder: _placeholder,
   value,
-  wrapper = {},
   ...attrs
 } = Astro.props;
 
-const elementAttrs = mapAttributes(attrs, [`${field}-textarea`]);
-const wrapperAttrs = mapAttributes(wrapper, ["textarea-wrapper"]);
+const elementAttrs = mapAttributes(attrs, ["textarea"]);
 
 const content = value || (await Astro.slots.render("default"))?.trim() || "";
 ---
 
-<span {...wrapperAttrs}>
-  <textarea
-    {...elementAttrs}
-    aria-labelledby={labelledBy}
-    {autocomplete}
-    {form}
-    {id}
-    {name}
-    set:html={content as string}
-  />
-</span>
+<textarea
+  {...elementAttrs}
+  aria-labelledby={labelledBy}
+  {autocomplete}
+  {form}
+  {id}
+  {name}
+  set:html={content as string}
+/>

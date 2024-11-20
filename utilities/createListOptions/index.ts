@@ -1,10 +1,6 @@
-type Options = Array<{
-	label: string
-	selected?: boolean | undefined
-	value?: string | number | undefined
-}>
+import type { Options } from "../../forms/types.ts"
 
-export default function createListOptions(list: Options): string {
+export default function createListOptions(list: Options = []): string {
 	return list.map((item) => `<option value="${item.value}"></option>`).join(
 		"\n",
 	)

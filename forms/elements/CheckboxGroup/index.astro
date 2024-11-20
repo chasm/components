@@ -46,7 +46,7 @@ const {
     (labelledBy: string) => {
       return (options as Options).map(
         ({ form: f, label, name: n, value, ...attrs }) => {
-          const inputAttrs = mapAttributes(attrs, ["sb-checkbox-input"]);
+          const inputAttrs = mapAttributes(attrs, ["checkbox-input"]);
 
           return (
             <Checkbox

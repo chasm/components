@@ -1,0 +1,57 @@
+---
+import "./index.css";
+
+import type { HTMLAttributes } from "astro/types";
+
+import generateShortId from "../../utilities/generateShortId/index.ts";
+import mapAttributes from "../../utilities/mapAttributes/index.ts";
+
+export type Props = HTMLAttributes<"input"> &
+  HTMLAttributes<"textarea"> & {
+    help?: string | undefined;
+    helpProps?: HTMLAttributes<"div"> | undefined;
+    label?: string | undefined;
+    labelProps?: HTMLAttributes<"div"> | undefined;
+    wrapperProps?: HTMLAttributes<"label"> | undefined;
+  };
+
+const {
+  help,
+  helpProps = {},
+  id = generateShortId(),
+  label,
+  labelProps = {},
+  wrapperProps = {},
+  ...props
+} = Astro.props;
+
+const attrs = mapAttributes(props, ["field"]);
+const helpAttrs = mapAttributes(helpProps, ["field-help"]);
+const labelAttrs = mapAttributes(labelProps, ["field-label"]);
+const wrapperAttrs = mapAttributes(wrapperProps, ["field-wrapper"]);
+
+const lbl = (await Astro.slots.render("label")) || label;
+const hlp = (await Astro.slots.render("help")) || help;
+
+const helpId = hlp ? `${id}-help` : "";
+const labelId = lbl ? `${id}-label` : "";
+const labelledBy = `${labelId} ${helpId}`.trim();
+
+const element = await Astro.slots.render("default", [labelledBy]);
+---
+
+<label {...wrapperAttrs}>
+  {lbl ? <div id={labelId} {...labelAttrs} set:html={lbl} /> : undefined}
+  {
+    hlp ? (
+      <div
+        aria-live="assertive"
+        id={helpId}
+        role="status"
+        {...helpAttrs}
+        set:html={hlp}
+      />
+    ) : undefined
+  }
+  <Fragment {...attrs} {id} set:html={element} />
+</label>
