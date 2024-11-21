@@ -16,7 +16,8 @@
     ".astro": true,
     "astro.config.mjs": true,
     "deno.json": true,
-    "tsconfig.json": true
+    "tsconfig.json": true,
+    ".cache": true
   },
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"

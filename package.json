@@ -1,6 +1,6 @@
 {
   "name": "@munat/components",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "Astro components with Deno",
   "keywords": [
     "astro-component",
@@ -166,7 +166,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.2.1",
     "@types/node": "^22.9.0",
-    "astro": "^4.16.13",
+    "astro": "^4.16.14",
     "temporal-polyfill": "^0.2.5",
     "typescript": "^5.6.3"
   }

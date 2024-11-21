@@ -7,6 +7,8 @@ import Head from "../../html/Head/index.astro";
 import Header from "../../landmarks/Header/index.astro";
 import Html from "../../html/index.astro";
 import Main from "../../landmarks/Main/index.astro";
+
+import generateShortId from "../../utilities/generateShortId";
 ---
 
 <Html>
@@ -20,6 +22,7 @@ import Main from "../../landmarks/Main/index.astro";
     </Header>
     <Main>
       <p>Astro components in vanilla JS.</p>
+      <p>{generateShortId()}</p>
     </Main>
     <Footer><p>Copyright 2024 Munat, Ltd.</p></Footer>
   </Body>
