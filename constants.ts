@@ -1,11 +1,6 @@
 import process from "node:process";
 
-export type ImageMediaType =
-	| "image/jpeg"
-	| "image/png"
-	| "image/webp"
-	| "image/avif"
-	| "image/svg"
+import type { ImageMediaType, TwitterCard } from "./types.ts";
 
 export const CHARS = {
 	amp: "&",
@@ -558,4 +553,11 @@ export const TIME_ZONE = {
 	"Africa/Lusaka": "+02:00",
 	"Africa/Harare": "+02:00",
 	"Europe/Mariehamn": "+02:00",
+}
+
+export const X_CARD_TYPE: Record<string, TwitterCard> = {
+	app: "app",
+	player: "player",
+	summary: "summary",
+	summaryWithLargeImage: "summary_large_image",
 }

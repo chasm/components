@@ -1,16 +1,20 @@
 ---
-import type { PageMetadata } from "../../types.ts";
+import type { Meta } from "../../types.ts";
 
 import type { HTMLAttributes } from "astro/types";
 
+import OpenGraph from "./OpenGraph/index.astro";
+import Twitter from "./Twitter/index.astro";
+
 export type Props = HTMLAttributes<"head"> & {
-  metadata: PageMetadata;
+  metadata: Meta;
   site: string;
 };
 
 const { metadata, site, ...props } = Astro.props;
 
-const { title } = metadata;
+const { author, canonical, copyright, description, publisher, robots, title } =
+  metadata;
 
 const ttl = title ? `${title} : ${site}` : site;
 ---
@@ -18,7 +22,22 @@ const ttl = title ? `${title} : ${site}` : site;
 <head {...props}>
   <meta charset="utf-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  {description ? <meta name="description" content={description} /> : undefined}
+  {copyright ? <meta name="copyright" content={copyright} /> : undefined}
+  <meta name="robots" content={robots ? robots.join(",") : "index,follow"} />
+  {author ? <meta name="author" content={author} /> : undefined}
+  {publisher ? <meta name="publisher" content={publisher} /> : undefined}
+
+  <!-- Open graph -->
+  <OpenGraph {metadata} />
+
+  <!-- X -->
+  <Twitter {metadata} />
+
+  <!-- Links -->
+  <link rel="canonical" href={canonical} />
+
   <title>{ttl}</title>
   <slot />
 </head>

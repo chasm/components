@@ -2,7 +2,7 @@
 import "./index.css";
 
 import type { HTMLAttributes, HTMLTag } from "astro/types";
-import type { Card } from "../../types";
+import type { Card, CardLink } from "../../types";
 
 import Error from "../../widgets/Error/index.astro";
 import Footer from "./Footer/index.astro";
@@ -40,7 +40,7 @@ const {
 const Heading = as;
 
 const {
-  link: { href: linkHref, label: linkLabel, useMoreLink } = {},
+  link: { href: linkHref, label: linkLabel, useMoreLink } = {} as CardLink,
   title: cardTitle,
 } = card;
 

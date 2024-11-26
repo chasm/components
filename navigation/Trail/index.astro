@@ -23,7 +23,7 @@ const meta: Record<string, Anchor> = pages
   .reduce(
     (out, page) => {
       if (page.url != null) {
-        out[page.url || "/"] = Object.assign(page.metadata, {
+        out[page.url || "/"] = Object.assign({}, page.metadata, {
           href: page.url || "/",
         });
       }

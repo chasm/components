@@ -1,0 +1,137 @@
+---
+import type { Meta, Twitter } from "../../../types.ts";
+
+import getImageSrc from "../getImageSrc/index.ts";
+
+export type Props = {
+  metadata: Meta;
+};
+
+const { metadata } = Astro.props;
+
+const {
+  description: pageDescription,
+  hero,
+  title: pageTitle,
+  twitter = {} as Twitter,
+} = metadata;
+
+const {
+  app = {},
+  card,
+  creator = {},
+  description: xDescription,
+  image,
+  player: playr = {},
+  site = {},
+  title: xTitle,
+} = twitter;
+
+const { googleplay, ipad, iphone } = app;
+
+const { height, src: player, stream, width } = playr;
+
+const img = image || hero;
+
+const src = img ? getImageSrc(img) : undefined;
+const { alt } = img || {};
+
+const description = xDescription || pageDescription;
+const title = xTitle || pageTitle;
+---
+
+{card ? <meta property="twitter:card" content={card} /> : undefined}
+
+{
+  site.username ? (
+    <meta property="twitter:site" content={site.username} />
+  ) : undefined
+}
+{site.id ? <meta property="twitter:site:id" content={site.id} /> : undefined}
+
+{
+  creator.username ? (
+    <meta property="twitter:creator" content={creator.username} />
+  ) : undefined
+}
+{
+  creator.id ? (
+    <meta property="twitter:creator:id" content={creator.id} />
+  ) : undefined
+}
+
+{
+  description ? (
+    <meta property="twitter:description" content={description} />
+  ) : undefined
+}
+{title ? <meta property="twitter:title" content={title} /> : undefined}
+
+{src ? <meta property="twitter:image" content={src} /> : undefined}
+{alt ? <meta property="twitter:image:alt" content={alt} /> : undefined}
+
+{
+  card === "app" && googleplay ? (
+    <>
+      {googleplay.id ? (
+        <meta property="twitter:app:id:googleplay" content={googleplay.id} />
+      ) : undefined}
+      {googleplay.name ? (
+        <meta
+          property="twitter:app:name:googleplay"
+          content={googleplay.name}
+        />
+      ) : undefined}
+      {googleplay.url ? (
+        <meta property="twitter:app:url:googleplay" content={googleplay.url} />
+      ) : undefined}
+    </>
+  ) : undefined
+}
+{
+  card === "app" && ipad ? (
+    <>
+      {ipad.id ? (
+        <meta property="twitter:app:id:ipad" content={ipad.id} />
+      ) : undefined}
+      {ipad.name ? (
+        <meta property="twitter:app:name:ipad" content={ipad.name} />
+      ) : undefined}
+      {ipad.url ? (
+        <meta property="twitter:app:url:ipad" content={ipad.url} />
+      ) : undefined}
+    </>
+  ) : undefined
+}
+{
+  card === "app" && iphone ? (
+    <>
+      {iphone.id ? (
+        <meta property="twitter:app:id:iphone" content={iphone.id} />
+      ) : undefined}
+      {iphone.name ? (
+        <meta property="twitter:app:name:iphone" content={iphone.name} />
+      ) : undefined}
+      {iphone.url ? (
+        <meta property="twitter:app:url:iphone" content={iphone.url} />
+      ) : undefined}
+    </>
+  ) : undefined
+}
+
+{
+  card === "player" ? (
+    <>
+      {player ? <meta property="twitter:player" content={player} /> : undefined}
+      {width ? (
+        <meta property="twitter:player:width" content={String(width)} />
+      ) : undefined}
+      {stream ? (
+        <meta property="twitter:player:stream" content={stream} />
+      ) : undefined}
+      {height ? (
+        <meta property="twitter:player:height" content={String(height)} />
+      ) : undefined}
+    </>
+  ) : undefined
+}

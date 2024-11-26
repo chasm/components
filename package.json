@@ -1,6 +1,6 @@
 {
   "name": "@munat/components",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Astro components with Deno",
   "keywords": [
     "astro-component",
@@ -46,6 +46,7 @@
     "./cards/Card/HGroup/Tags": "./cards/Card/HGroup/Tags/index.astro",
     "./cards/Card/HGroup/TimeToRead": "./cards/Card/HGroup/TimeToRead/index.astro",
     "./cards/Cards": "./cards/index.astro",
+    "./constants": "./constants.ts",
     "./elements/CallingCodeSelect": ".forms/elements/CallingCodeSelect/index.astro",
     "./elements/CheckboxGroup": ".forms/elements/CheckboxGroup/index.astro",
     "./elements/Checkbox": ".forms/elements/Checkbox/index.astro",
@@ -124,8 +125,9 @@
     "./temporal/PlainDate": "./temporal/PlainDate/index.astro",
     "./types": "./types.ts",
     "./utilities/clamp": "./utilities/clamp/index.ts",
-    "./utilities/generateShortId/index.ts": "./utilities/generateShortId/index.ts",
+    "./utilities/generateShortId": "./utilities/generateShortId/index.ts",
     "./utilities/getPaths": "./utilities/getPaths/index.ts",
+    "./utilities/setAltText": "./utilities/setAltText/index.ts",
     "./utilities/unique": "./utilities/unique/index.ts",
     "./widgets/Abbr": "./widgets/Abbr/index.astro",
     "./widgets/CCLicense": "./widgets/CCLicense/index.astro",
@@ -165,9 +167,9 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.2.1",
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.9.4",
     "astro": "^4.16.14",
     "temporal-polyfill": "^0.2.5",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   }
 }

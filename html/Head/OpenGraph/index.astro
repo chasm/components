@@ -1,0 +1,95 @@
+---
+import type { Meta } from "../../../types";
+
+import { Temporal } from "temporal-polyfill";
+
+import getImageSrc from "../getImageSrc/index.ts";
+
+export type Props = {
+  metadata: Meta;
+};
+
+const { metadata } = Astro.props;
+
+const {
+  article = {},
+  author,
+  canonical,
+  description,
+  hero,
+  profile,
+  publisher,
+  timeZone = "UTC",
+  title: pageTitle,
+  type = "website",
+} = metadata;
+
+const {
+  modifiedOn,
+  publishedOn,
+  section,
+  tags = [],
+  title: articleTitle,
+} = article;
+
+const src = getImageSrc(hero);
+
+const modifiedTime = modifiedOn
+  ? Temporal.PlainDateTime.from(modifiedOn)
+      .toZonedDateTime(Temporal.TimeZone.from(timeZone))
+      .toJSON()
+  : undefined;
+const publishedTime = publishedOn
+  ? Temporal.PlainDateTime.from(publishedOn)
+      .toZonedDateTime(Temporal.TimeZone.from(timeZone))
+      .toJSON()
+  : undefined;
+
+const title = articleTitle || pageTitle;
+---
+
+<meta property="og:type" content={type} />
+{title ? <meta property="og:title" content={title} /> : undefined}
+<meta property="og:url" content={canonical} />
+{src ? <meta property="og:image" content={src} /> : undefined}
+{
+  description ? (
+    <meta property="og:description" content={description} />
+  ) : undefined
+}
+
+{
+  type === "article" ? (
+    <>
+      {author ? <meta property="article:author" content={author} /> : undefined}
+      {publisher ? (
+        <meta property="article:publisher" content={publisher} />
+      ) : undefined}
+      {publishedTime ? (
+        <meta property="article:published_time" content={publishedTime} />
+      ) : undefined}
+      {modifiedTime ? (
+        <meta property="article:modified_time" content={modifiedTime} />
+      ) : undefined}
+      {section ? (
+        <meta property="article:section" content={section} />
+      ) : undefined}
+      {tags.map(tag => (
+        <meta property="article:tag" content={tag} />
+      ))}
+    </>
+  ) : undefined
+}
+
+{
+  type === "profile" ? (
+    <>
+      {profile?.given ? (
+        <meta property="profile:first_name" content={profile.given} />
+      ) : undefined}
+      {profile?.family ? (
+        <meta property="profile:last_name" content={profile.family} />
+      ) : undefined}
+    </>
+  ) : undefined
+}
