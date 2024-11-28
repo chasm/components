@@ -4,6 +4,7 @@ import type { Meta } from "../../../types";
 import { Temporal } from "temporal-polyfill";
 
 import getImageSrc from "../getImageSrc/index.ts";
+import collapseWhitespace from "../../../utilities/collapseWhitespace";
 
 export type Props = {
   metadata: Meta;
@@ -54,7 +55,7 @@ const title = articleTitle || pageTitle;
 {src ? <meta property="og:image" content={src} /> : undefined}
 {
   description ? (
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={collapseWhitespace(description)} />
   ) : undefined
 }
 

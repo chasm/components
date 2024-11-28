@@ -6,6 +6,8 @@ import type { HTMLAttributes } from "astro/types";
 import OpenGraph from "./OpenGraph/index.astro";
 import Twitter from "./Twitter/index.astro";
 
+import collapseWhitespace from "../../utilities/collapseWhitespace/index.ts";
+
 export type Props = HTMLAttributes<"head"> & {
   metadata: Meta;
   site: string;
@@ -13,9 +15,17 @@ export type Props = HTMLAttributes<"head"> & {
 
 const { metadata, site, ...props } = Astro.props;
 
-const { author, canonical, copyright, description, publisher, robots, title } =
-  metadata;
+const {
+  author,
+  canonical,
+  copyright,
+  description: desc,
+  publisher,
+  robots,
+  title,
+} = metadata;
 
+const description = collapseWhitespace(desc);
 const ttl = title ? `${title} : ${site}` : site;
 ---
 

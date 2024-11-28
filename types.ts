@@ -13,7 +13,7 @@ export type Anchor = {
 }
 
 export interface AstroPage extends AstroInstance {
-	metadata: PageMetadata
+	metadata: Meta
 }
 
 export type ImageFormat = "png" | "jpeg" | "avif" | "webp"
@@ -25,35 +25,9 @@ export type ImageMediaType =
 	| "image/avif"
 	| "image/svg"
 
-export type PageMetadata = {
-	author?: string | undefined
-	card?: Card | undefined
-	children?: Array<string> | undefined
-	copyright?: string | undefined
-	description?: string | undefined
-	href?: string
-	id?: string | undefined
-	image?: Image | undefined
-	label?: string
-	modifiedOn?: string | Temporal.PlainDateLike | undefined
-	profile?: {
-		given: string
-		family: string
-	}
-	publishedOn?: string | Temporal.PlainDateLike | undefined
-	publisher?: string | undefined
-	robots?: string | undefined
-	section?: string | undefined
-	subtitle?: string | undefined
-	tags?: Array<string> | undefined
-	timeToRead?: number | undefined
-	timeZone?: Temporal.TimeZoneLike | undefined
-	title: string
-	type?: "article" | "profile" | "website" | undefined
-}
-
 export type Article = {
 	author?: string | undefined
+	image?: Image | undefined
 	modifiedOn?: string | Temporal.PlainDateTimeLike | undefined
 	publishedOn?: string | Temporal.PlainDateTimeLike | undefined
 	publisher?: string | undefined
@@ -76,8 +50,8 @@ export type Card = {
 
 export type Image = {
 	alt?: string | undefined
-	config: ImageConfig
-	description?: string | undefined
+	config?: ImageConfig | undefined
+	describedBy?: string | undefined
 	filename: string
 	folder: string
 	format?: ImageFormat | undefined
@@ -155,14 +129,17 @@ export type Meta = {
 	copyright?: string | undefined
 	description: string
 	hero?: Image | undefined
+	href?: string | undefined
 	id?: string | undefined
 	license?: LicenseData | undefined
 	link?: Partial<Link> | undefined
 	profile?: Profile | undefined
 	publisher?: string | undefined
 	robots?: Array<Robot> | undefined
+	subtitle?: string | undefined
 	timeZone?: Temporal.TimeZoneLike | undefined
 	title: string
-	twitter?: Twitter | undefined
+	twitter?: Partial<Twitter> | undefined
 	type?: OpenGraphType | undefined
+	uplabel?: string | undefined
 }

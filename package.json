@@ -1,6 +1,6 @@
 {
   "name": "@munat/components",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Astro components with Deno",
   "keywords": [
     "astro-component",
@@ -127,6 +127,7 @@
     "./utilities/clamp": "./utilities/clamp/index.ts",
     "./utilities/generateShortId": "./utilities/generateShortId/index.ts",
     "./utilities/getPaths": "./utilities/getPaths/index.ts",
+    "./utilities/mapPageMeta": "./utilities/mapPageMeta/index.ts",
     "./utilities/setAltText": "./utilities/setAltText/index.ts",
     "./utilities/unique": "./utilities/unique/index.ts",
     "./widgets/Abbr": "./widgets/Abbr/index.astro",
@@ -149,7 +150,7 @@
   },
   "scripts": {
     "astro": "astro",
-    "build": "astro check && astro build",
+    "build": "astro check --root ./src && astro build",
     "bump": "pnpm version patch --force",
     "bump:major": "pnpm version major --force",
     "bump:minor": "pnpm version minor --force",
@@ -167,8 +168,8 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/sitemap": "^3.2.1",
-    "@types/node": "^22.9.4",
-    "astro": "^4.16.14",
+    "@types/node": "^22.10.1",
+    "astro": "^4.16.16",
     "temporal-polyfill": "^0.2.5",
     "typescript": "^5.7.2"
   }

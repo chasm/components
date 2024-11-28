@@ -3,11 +3,11 @@ import "./index.css";
 
 import type { HTMLAttributes } from "astro/types";
 
-import type { AstroPage } from "../../types.ts";
+import type { Meta } from "../../types.ts";
 
 export type Props = HTMLAttributes<"nav"> & {
   label?: string | undefined;
-  pages: Array<AstroPage>;
+  pages: Array<Meta>;
 };
 
 const { label: l, pages, ...props } = Astro.props;
@@ -26,8 +26,7 @@ const href =
     .split("/")
     .slice(0, -1)
     .join("/") || "/";
-const label =
-  pages.find(page => page.url === href)?.metadata?.label || l || "Up";
+const label = pages.find(page => page.href === href)?.link?.label || l || "Up";
 
 const arrow = await Astro.slots.render("arrow");
 

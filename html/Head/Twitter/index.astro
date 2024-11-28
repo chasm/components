@@ -1,5 +1,6 @@
 ---
 import type { Meta, Twitter } from "../../../types.ts";
+import collapseWhitespace from "../../../utilities/collapseWhitespace";
 
 import getImageSrc from "../getImageSrc/index.ts";
 
@@ -62,13 +63,20 @@ const title = xTitle || pageTitle;
 
 {
   description ? (
-    <meta property="twitter:description" content={description} />
+    <meta
+      property="twitter:description"
+      content={collapseWhitespace(description)}
+    />
   ) : undefined
 }
 {title ? <meta property="twitter:title" content={title} /> : undefined}
 
 {src ? <meta property="twitter:image" content={src} /> : undefined}
-{alt ? <meta property="twitter:image:alt" content={alt} /> : undefined}
+{
+  alt ? (
+    <meta property="twitter:image:alt" content={collapseWhitespace(alt)} />
+  ) : undefined
+}
 
 {
   card === "app" && googleplay ? (

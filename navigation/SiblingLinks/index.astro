@@ -3,12 +3,12 @@ import "./index.css";
 
 import type { HTMLAttributes } from "astro/types";
 
-import type { AstroPage } from "../../types.ts";
+import type { Meta } from "../../types.ts";
 
 import getSiblingLinks from "./getSiblingLinks/";
 
 export type Props = HTMLAttributes<"nav"> & {
-  pages: Array<AstroPage>;
+  pages: Array<Meta>;
 };
 
 const { pages, ...props } = Astro.props;
@@ -18,7 +18,7 @@ const { pathname } = Astro.url;
 const path = pathname.replace(/\/$/, "");
 const parentPath = path.replace(/\/([^/]+)$/, "") || "/";
 
-const parent = pages.find(page => page.url?.replace(/\/$/, "") === parentPath);
+const parent = pages.find(page => page.href?.replace(/\/$/, "") === parentPath);
 
 const attrs = Object.assign(
   {
@@ -27,16 +27,12 @@ const attrs = Object.assign(
   props
 );
 
-const children = parent?.metadata?.children || [];
+const children = parent?.children || [];
 
 const { prev, next } = getSiblingLinks(parentPath, path, children);
 
-const nextLink = pages.find(
-  page => page.url?.replace(/\/$/, "") === next
-)?.metadata;
-const prevLink = pages.find(
-  page => page.url?.replace(/\/$/, "") === prev
-)?.metadata;
+const nextLink = pages.find(page => page.href?.replace(/\/$/, "") === next);
+const prevLink = pages.find(page => page.href?.replace(/\/$/, "") === prev);
 
 const left = await Astro.slots.render("prev");
 const right = await Astro.slots.render("next");
@@ -50,7 +46,7 @@ const right = await Astro.slots.render("next");
           <>
             <Fragment set:html={left} />
             <a href={prev} rel="prev">
-              {prevLink?.label || prevLink?.title}
+              {prevLink?.link?.label || prevLink?.title}
             </a>
           </>
         ) : undefined
@@ -61,7 +57,7 @@ const right = await Astro.slots.render("next");
         nextLink ? (
           <>
             <a href={next} rel="next">
-              {nextLink?.label || nextLink?.title}
+              {nextLink?.link?.label || nextLink?.title}
             </a>
             <Fragment set:html={right} />
           </>
