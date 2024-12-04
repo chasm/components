@@ -20,6 +20,7 @@ const {
   canonical,
   copyright,
   description: desc,
+  icons,
   publisher,
   robots,
   title,
@@ -31,7 +32,6 @@ const ttl = title ? `${title} : ${site}` : site;
 
 <head {...props}>
   <meta charset="utf-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   {description ? <meta name="description" content={description} /> : undefined}
   {copyright ? <meta name="copyright" content={copyright} /> : undefined}
@@ -46,6 +46,13 @@ const ttl = title ? `${title} : ${site}` : site;
   <Twitter {metadata} />
 
   <!-- Links -->
+  {
+    icons ? (
+      icons.map(icon => <link {...icon} />)
+    ) : (
+      <link rel="icon" href="favicon.ico" />
+    )
+  }
   <link rel="canonical" href={canonical} />
 
   <title>{ttl}</title>

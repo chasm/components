@@ -87,7 +87,7 @@ const attrs = Object.assign(
         for (const card of cards) {
           const tagLabels = [...card.querySelectorAll(".card-tag")];
           const tagsOn = [...enabled];
-          const cardTags = card.getAttribute("data-tags")?.split(",");
+          const cardTags = card.getAttribute("data-tags")?.split(",") || [];
 
           if (!tagsOn.length || tagsOn.some(t => cardTags.includes(t))) {
             card.removeAttribute("aria-hidden");

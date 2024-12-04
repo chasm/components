@@ -48,6 +48,12 @@ export type Card = {
 	title?: string | undefined
 }
 
+export type Icon = {
+	href: string
+	sizes?: string | undefined
+	type: string
+}
+
 export type Image = {
 	alt?: string | undefined
 	config?: ImageConfig | undefined
@@ -130,6 +136,7 @@ export type Meta = {
 	description: string
 	hero?: Image | undefined
 	href?: string | undefined
+	icons?: Array<Icon> | undefined
 	id?: string | undefined
 	license?: LicenseData | undefined
 	link?: Partial<Link> | undefined
@@ -143,3 +150,5 @@ export type Meta = {
 	type?: OpenGraphType | undefined
 	uplabel?: string | undefined
 }
+
+export type Pages = Record<string, () => Promise<AstroPage>>

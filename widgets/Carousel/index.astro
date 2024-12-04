@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import generateShortId from "../../utilities/generateShortId";
+
+export type Props = HTMLAttributes<"div"> & {
+  label: string;
+};
+
+const { id = generateShortId(), label, ...props } = Astro.props;
+
+const attrs = Object.assign(
+  {
+    "aria-label": label,
+    "aria-roledescription": "carousel",
+    class: "carousel",
+    role: "region",
+  },
+  props
+);
+---
+
+<div {...attrs}>
+  <slot />
+</div>

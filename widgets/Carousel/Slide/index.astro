@@ -1,0 +1,30 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+import generateShortId from "../../../utilities/generateShortId";
+
+export type Props = HTMLAttributes<"div"> & {};
+
+const { id = generateShortId(), title, ...props } = Astro.props;
+
+const content = await Astro.slots.render("default");
+const heading = (await Astro.slots.render("title")) || title;
+
+const hId = heading ? `${id}-heading` : undefined;
+
+const attrs = Object.assign(
+  {
+    "aria-labelledby": hId,
+    "aria-roledescription": "slide",
+    class: "slide",
+    role: "group",
+    tabindex: 0,
+  },
+  props
+);
+---
+
+<div {...attrs}>
+  {heading ? <h2 id={hId} set:html={heading} /> : undefined}
+  <Fragment set:html={content} />
+</div>

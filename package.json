@@ -131,6 +131,7 @@
     "./utilities/setAltText": "./utilities/setAltText/index.ts",
     "./utilities/unique": "./utilities/unique/index.ts",
     "./widgets/Abbr": "./widgets/Abbr/index.astro",
+    "./widgets/Carousel": "./widgets/Carousel/index.astro",
     "./widgets/CCLicense": "./widgets/CCLicense/index.astro",
     "./widgets/CCLicense/ByAttribution": "./widgets/CCLicense/ByAttribution/index.astro",
     "./widgets/CCLicense/CreativeCommons": "./widgets/CCLicense/CreativeCommons/index.astro",
@@ -144,6 +145,7 @@
     "./widgets/Picture/Source": "./widgets/Picture/Source/index.astro",
     "./widgets/Quoted": "./widgets/Quoted/index.astro",
     "./widgets/ScrollIndicator": "./widgets/ScrollIndicator/index.astro",
+    "./widgets/Slide": "./widgets/Carousel/Slide/index.astro",
     "./widgets/Toggletip": "./widgets/Toggletip/index.astro",
     "./widgets/Tooltip": "./widgets/Tooltip/index.astro",
     ".": "./index.ts"
