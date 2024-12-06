@@ -1,4 +1,6 @@
 ---
+import "./index.css";
+
 import type { HTMLAttributes } from "astro/types";
 
 import generateShortId from "../../utilities/generateShortId";
@@ -14,6 +16,7 @@ const attrs = Object.assign(
     "aria-label": label,
     "aria-roledescription": "carousel",
     class: "carousel",
+    id,
     role: "region",
   },
   props
@@ -21,5 +24,61 @@ const attrs = Object.assign(
 ---
 
 <div {...attrs}>
-  <slot />
+  <div class="slides">
+    <slot />
+  </div>
 </div>
+
+<script is:inline>
+  const carousel = document.querySelector(".carousel");
+
+  if (carousel) {
+    const slides = document.querySelectorAll(".slide");
+
+    const controls = document.createElement("DIV");
+
+    controls.classList.add("controls");
+
+    for (const [index, slide] of slides.entries()) {
+      const label = document.createElement("LABEL");
+      const input = document.createElement("INPUT");
+      const span = document.createElement("SPAN");
+
+      input.setAttribute("aria-label", `Slide ${index}`);
+
+      input.setAttribute("aria-hidden", "");
+      input.setAttribute("name", `${carousel.id}-slides`);
+      input.setAttribute("type", "radio");
+      input.setAttribute("value", `${slide.id}`);
+
+      slide.addEventListener("focus", event => {
+        event.target.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+
+        console.log(event.target);
+      });
+
+      input.addEventListener("change", event => {
+        const id = event.target.value;
+
+        slide.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      });
+
+      label.appendChild(input);
+      label.appendChild(span);
+
+      controls.appendChild(label);
+    }
+
+    controls.firstChild.firstChild.setAttribute("checked", "");
+
+    carousel.prepend(controls);
+  }
+</script>

@@ -1,4 +1,4 @@
-import type { Meta, Pages } from "../../types.ts";
+import type { Meta, Pages } from "../../types.ts"
 
 export default async function mapPageMeta(pages: Pages): Promise<Array<Meta>> {
 	return await Promise.all(
@@ -7,5 +7,5 @@ export default async function mapPageMeta(pages: Pages): Promise<Array<Meta>> {
 				href: url.replace(/^\/src\/pages|\/index.astro$/g, ""),
 			}, (await pages[url]?.())?.metadata || {} as Meta)
 		),
-	);
+	)
 }

@@ -10,15 +10,16 @@ const { id = generateShortId(), title, ...props } = Astro.props;
 const content = await Astro.slots.render("default");
 const heading = (await Astro.slots.render("title")) || title;
 
-const hId = heading ? `${id}-heading` : undefined;
+const hId = heading ? `${id}-heading` : id;
 
 const attrs = Object.assign(
   {
-    "aria-labelledby": hId,
+    "aria-label": "This is the label to be read aloud.",
     "aria-roledescription": "slide",
     class: "slide",
-    role: "group",
-    tabindex: 0,
+    id,
+    role: "status",
+    tabindex: "0",
   },
   props
 );
