@@ -24,7 +24,7 @@ const attrs = Object.assign(
 const content = (await Astro.slots.render("tip")) || tip;
 ---
 
-<Component aria-labelledby={id} role="tooltip" {...attrs}>
+<Component aria-labelledby={id} {...attrs}>
   <slot />
 </Component>
 <span id={id} role="tooltip">{content}</span>
