@@ -134,6 +134,7 @@ export type Meta = {
 	children?: Array<string> | undefined
 	copyright?: string | undefined
 	description: string
+	event?: string | undefined
 	hero?: Image | undefined
 	href?: string | undefined
 	icons?: Array<Icon> | undefined
